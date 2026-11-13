@@ -1,0 +1,274 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Painel/ADM</title>
+    <link rel="stylesheet" href="../silas.css/dashboard.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════
+       SIDEBAR
+  ══════════════════════════════ -->
+    <div class="dashboard-sidebar">
+      <div class="dashboard-logo">
+        <a href="Loja.html">
+          <img src="../img/logotipo.png" alt="ASAF" />
+        </a>
+        <h2>ADMIN</h2>
+      </div>
+
+      <ul class="dashboard-menu">
+        <li class="active">
+          <a href="dashboard.html">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="adm-produtos.html">
+            <i class="fa-solid fa-box"></i>
+            <span>Produtos</span>
+          </a>
+        </li>
+        <li>
+          <a href="clientes.html">
+            <i class="fa-solid fa-users"></i>
+            <span>Clientes</span>
+          </a>
+        </li>
+        <li>
+          <a href="encomendas.html">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Encomendas</span>
+          </a>
+        </li>
+        <li>
+          <a href="mensagens.html">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Mensagens</span>
+          </a>
+        </li>
+        <li>
+          <a href="configuracoes.html">
+            <i class="fa-solid fa-gear"></i>
+            <span>Configurações</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /sidebar -->
+
+    <!-- ══════════════════════════════
+       CONTEÚDO PRINCIPAL
+  ══════════════════════════════ -->
+    <main class="dashboard-main">
+      <!-- ── TOPBAR ────────────────── -->
+      <div class="dashboard-topbar">
+        <div class="dashboard-left-top">
+          <h1>Dashboard Administrativo</h1>
+          <p id="dataAtual">Carregando data...</p>
+        </div>
+
+        <div class="dashboard-right-top">
+          <div class="dashboard-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Pesquisar..." />
+          </div>
+          <div class="dashboard-notification">
+            <i class="fa-solid fa-bell"></i>
+            <span id="notificacoes">0</span>
+          </div>
+          <div class="dashboard-profile">
+            <img
+              src="../img/Men's Solid Color Front Closure Pocket Long Sleeve Jacket, Autumn_Winter.jfif"
+              alt="Administrador" />
+            <div>
+              <strong>Administrador</strong>
+              <small>Painel ASAF</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /topbar -->
+
+      <!-- ── CARDS ─────────────────── -->
+      <section class="dashboard-cards">
+        <div class="dashboard-card blue">
+          <div class="dashboard-card-icon"><i class="fa-solid fa-box"></i></div>
+          <div class="dashboard-card-content">
+            <h4>Produtos</h4>
+            <h2 id="produtos">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card green">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Clientes</h4>
+            <h2 id="clientes">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card orange">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Encomendas</h4>
+            <h2 id="pedidos">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card purple">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-sack-dollar"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Receita</h4>
+            <h2 id="receita">0 Kz</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card yellow">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Pendentes</h4>
+            <h2 id="pendentes">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card cyan">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Confirmadas</h4>
+            <h2 id="confirmadas">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card teal">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Enviadas</h4>
+            <h2 id="enviadas">0</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-card red">
+          <div class="dashboard-card-icon">
+            <i class="fa-solid fa-check-double"></i>
+          </div>
+          <div class="dashboard-card-content">
+            <h4>Entregues</h4>
+            <h2 id="entregues">0</h2>
+          </div>
+        </div>
+      </section>
+      <!-- /cards -->
+
+      <!-- ── ÁREA CENTRAL ──────────── -->
+      <section class="dashboard-center">
+        <div class="dashboard-chart-card">
+          <div class="dashboard-section-title">
+            <h2><i class="fa-solid fa-chart-column"></i> Receita Mensal</h2>
+          </div>
+          <div style="position: relative; width: 100%; height: 300px">
+            <canvas id="graficoVendas"></canvas>
+          </div>
+        </div>
+
+        <div class="dashboard-summary-card">
+          <div class="dashboard-section-title">
+            <h2><i class="fa-solid fa-chart-pie"></i> Resumo Geral</h2>
+          </div>
+          <div id="resumoDashboard"></div>
+        </div>
+      </section>
+      <!-- /dashboard-middle -->
+
+      <!-- ── PARTE INFERIOR ────────── -->
+      <section class="dashboard-bottom-area">
+        <!-- Últimas Encomendas -->
+        <div class="dashboard-orders-card">
+          <div class="dashboard-section-title">
+            <h2>
+              <i class="fa-solid fa-cart-shopping"></i> Últimas Encomendas
+            </h2>
+          </div>
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Total</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTable"></tbody>
+          </table>
+        </div>
+        <!-- /orders-card -->
+
+        <!-- Painel Direito -->
+        <div class="dashboard-right-panel">
+          <div class="dashboard-products-card">
+            <div class="dashboard-section-title">
+              <h2><i class="fa-solid fa-trophy"></i> Produtos Mais Vendidos</h2>
+            </div>
+            <div id="bestProducts"></div>
+          </div>
+
+          <div class="dashboard-activity-card">
+            <div class="dashboard-section-title">
+              <h2>
+                <i class="fa-solid fa-clock-rotate-left"></i> Atividade Recente
+              </h2>
+            </div>
+            <div id="activityList"></div>
+          </div>
+        </div>
+        <!-- /right-panel -->
+      </section>
+      <!-- /dashboard-bottom -->
+
+      <!-- ── RODAPÉ ─────────────────── -->
+      <footer class="dashboard-footer">
+        <p>© 2026 ASAF| Painel Administrativo</p>
+      </footer>
+    </main>
+    <!-- /main -->
+
+    <!-- ══════════════════════════════
+       SCRIPTS
+  ══════════════════════════════ -->
+    <!-- Chart.js DEVE carregar antes do dashboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../silas.Js/dashboard.js"></script>
+  </body>
+</html>

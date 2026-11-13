@@ -1,0 +1,155 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Carrinho</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="../silas.css/carrinho.css" />
+    <script src="../silas.Js/auth.js"></script>
+<script>
+  Auth.exigir();
+</script>
+  </head>
+  <body>
+    <!-- NAV 1 -->
+
+    <!-- PAGE -->
+    <div class="page">
+      <div class="breadcrumb">
+        <a href="Loja.html">Início</a>
+        <span class="sep">/</span>
+        <span class="current">Carrinho</span>
+      </div>
+
+      <div class="cart-layout">
+        <!-- LEFT -->
+        <div class="cart-left">
+          <h1 class="cart-page-title">O Teu Carrinho</h1>
+          <p class="cart-subtitle" id="cart-subtitle"></p>
+          <div class="cart-count-label" id="cart-count-label"></div>
+
+          <div class="empty-cart" id="empty-cart" style="display: none">
+            <div class="empty-icon">🛒</div>
+            <h3>Carrinho Vazio</h3>
+            <p>Ainda não adicionaste nenhum produto ao carrinho.</p>
+            <a href="Produtos.html">Ver Produtos</a>
+          </div>
+
+          <ul class="cart-items" id="cart-items"></ul>
+
+          <div class="cart-actions" id="cart-actions" style="display: flex">
+            <a class="continue-link" href="Produtos.html">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M19 12H5M11 6l-6 6 6 6"
+                  stroke="#111"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              CONTINUAR A COMPRAR
+            </a>
+            <button class="clear-link" id="clear-cart">Limpar carrinho</button>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="cart-right">
+          <h2 class="summary-title">RESUMO DA ENCOMENDA</h2>
+
+          <label class="field-label">Código de desconto</label>
+          <div class="coupon-row">
+            <input
+              class="coupon-input"
+              id="coupon-input"
+              type="text"
+              placeholder="Ex: SAVE10" />
+            <button class="coupon-btn" id="apply-coupon">APLICAR</button>
+          </div>
+          <div class="coupon-msg" id="coupon-msg"></div>
+
+          <div class="totals">
+            <div class="total-row">
+              <span>Subtotal</span><span class="val" id="subtotal-val">—</span>
+            </div>
+            <div class="total-row">
+              <span>Desconto</span
+              ><span class="val discount" id="discount-val">—</span>
+            </div>
+            <div class="total-row">
+              <span>Envio</span
+              ><span class="val" id="shipping-val">Grátis</span>
+            </div>
+            <div class="total-row grand">
+              <span>TOTAL</span><span class="val" id="total-val">—</span>
+            </div>
+          </div>
+
+          <button class="checkout-btn" id="checkout-btn" disabled>
+            FINALIZAR COMPRA
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <button class="reserve-btn" id="reserve-btn">RESERVAR NA LOJA</button>
+
+          <div class="summary-notice">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#bbb" stroke-width="1.6" />
+              <path
+                d="M12 8v4M12 16h.01"
+                stroke="#bbb"
+                stroke-width="1.6"
+                stroke-linecap="round" />
+            </svg>
+            <p>
+              Podes escolher «Retirar na Loja» no checkout. Entrega em 2–7 dias
+              úteis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-box">
+          <h2>Minha Loja</h2>
+          <p>Moda, estilo e conforto para si.</p>
+        </div>
+        <div class="footer-box">
+          <h2>Links</h2>
+          <a href="Loja.html">Inicio</a>
+          <a href="Produtos.html">Produtos</a>
+          <a href="SOBRE.HTML">Sobre</a>
+          <a href="CONTATO.html">Contacto</a>
+        </div>
+        <div class="footer-box">
+          <h2>Contactos</h2>
+          <p>+244 943 233 053</p>
+          <p>ASAFmoda@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 ASAF — Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <script src="../silas.Js/carrinho.js"></script>
+  </body>
+</html>

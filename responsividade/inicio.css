@@ -1,0 +1,52 @@
+/**
+ * ── RESPONSIVO ──
+ *
+ * @format
+ */
+
+@media (max-width: 720px) {
+  .topo-menu {
+    gap: 14px;
+  }
+
+  .topo-menu a,
+  .topo-menu button {
+    font-size: 16px;
+  }
+
+  .topo-logo img {
+    width: 90px;
+  }
+
+  .so-grande {
+    display: none;
+  }
+
+  .slider {
+    height: 62vh;
+    min-height: 380px;
+  }
+
+  .seta {
+    display: none;
+  }
+
+  .grelha {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .item img {
+    height: 190px;
+  }
+
+  .bloco h2 {
+    font-size: 30px;
+  }
+
+  .toast {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}

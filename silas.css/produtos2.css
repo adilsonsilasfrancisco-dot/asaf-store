@@ -1,0 +1,1146 @@
+/**
+ * =====================================================
+ *    ASAF STORE — produtos.css
+ *    Paleta: Preto & Branco | Bebas Neue + Poppins
+ * =====================================================
+ *
+ * @format
+ */
+
+/* ── RESET & BASE ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --preto: #0a0a0a;
+  --preto-soft: #111111;
+  --preto-card: #161616;
+  --cinza-escuro: #222222;
+  --cinza-medio: #444444;
+  --cinza-claro: #888888;
+  --branco: #ffffff;
+  --branco-soft: #f5f5f5;
+  --branco-dim: #e0e0e0;
+  --borda: #2a2a2a;
+  --borda-hover: #555555;
+
+  --font-titulo: "Bebas Neue", sans-serif;
+  --font-corpo: "Poppins", sans-serif;
+
+  --transition: 0.3s ease;
+  --radius: 4px;
+  --radius-lg: 8px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-corpo);
+  background-color: var(--branco);
+  color: var(--preto);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* =====================================================
+   HEADER / NAV
+===================================================== */
+.produtos-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+
+  background-color: var(--preto);
+  border-bottom: 1px solid var(--borda);
+  backdrop-filter: blur(10px);
+}
+
+.produtos-nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Logotipo */
+
+.produtos-logo img {
+  width: 125px;
+  object-fit: cover;
+}
+
+/* Menu */
+.produtos-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.produtos-menu a {
+  font-family: var(--font-corpo);
+  font-size: 18px;
+
+  color: var(--branco);
+}
+.produtos-menu a:hover {
+  border-bottom: 2px solid white;
+}
+.produtos-menu a:hover,
+.produtos-menu a:hover::after,
+.produtos-menu a.ativo::after {
+  width: 100%;
+}
+
+/* Ações (carrinho) */
+.produtos-acoes {
+  display: flex;
+  align-items: center;
+}
+
+.carrinho-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1rem;
+  color: var(--branco);
+  transition: opacity var(--transition);
+  position: relative;
+}
+
+.carrinho-link:hover {
+  opacity: 0.7;
+}
+
+#contadorCarrinho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--branco);
+  color: var(--preto);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+.produtos-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+/* ── INTRO ── */
+.produtos-intro {
+  margin-top: 30px;
+  padding: 4rem 0 2.5rem;
+  text-align: center;
+}
+
+.produtos-subtitulo {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--borda-hover);
+  padding: 0.3rem 1rem;
+  border-radius: 2px;
+}
+
+.produtos-intro h1 {
+  font-family: var(--font-titulo);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: 0.04em;
+  color: var(--preto);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.produtos-intro p {
+  font-size: 0.92rem;
+  color: var(--cinza-claro);
+  font-weight: 300;
+}
+
+/* ── FILTROS ── */
+.produtos-filtros {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.produtos-pesquisa {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius);
+  padding: 0 1.1rem;
+  height: 46px;
+  transition: border-color var(--transition);
+}
+
+.produtos-pesquisa:focus-within {
+  border-color: var(--preto);
+}
+
+.produtos-pesquisa i {
+  color: var(--branco);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.produtos-pesquisa input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-corpo);
+  font-size: 0.88rem;
+  color: var(--preto);
+}
+
+.produtos-pesquisa input::placeholder {
+  color: var(--cinza-medio);
+}
+
+.produtos-filtro-categoria select {
+  height: 46px;
+  padding: 0 1.2rem;
+  background: var(--preto-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--radius);
+  color: var(--branco);
+  font-family: var(--font-corpo);
+  font-size: 0.86rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.produtos-filtro-categoria select:focus,
+.produtos-filtro-categoria select:hover {
+  border-color: var(--branco);
+}
+
+.produtos-filtro-categoria select option {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+/* =====================================================
+   CATEGORIAS
+===================================================== */
+.categoria-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Cabeçalho da categoria */
+.categoria-cabecalho {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.categoria-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--preto);
+  margin-bottom: 0.3rem;
+}
+
+.categoria-cabecalho h2 {
+  font-family: var(--font-titulo);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: 0.06em;
+  color: var(--preto);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.categoria-cabecalho h2 i {
+  font-size: 1.1rem;
+  color: var(--preto);
+}
+
+/* ── GRID DE PRODUTOS ── */
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.4rem;
+}
+
+/* ── CARD DE PRODUTO ── */
+.produto-card {
+  background: var(--branco);
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
+  cursor: pointer;
+}
+
+.produto-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Imagem */
+.produto-imagem {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--cinza-escuro);
+}
+
+.produto-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: grayscale(15%);
+}
+
+.produto-card:hover .produto-imagem img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+
+/* Badge / Tag */
+.produto-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--preto);
+  color: var(--branco);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+}
+
+.produto-badge.novo {
+  background: var(--branco);
+  color: var(--preto);
+}
+.produto-badge.promo {
+  background: var(--preto);
+  color: var(--branco);
+  border: 1px solid var(--borda-hover);
+}
+
+/* Botão rápido (overlay) */
+.produto-overlay {
+  position: absolute;
+  inset: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.produto-card:hover .produto-overlay {
+  opacity: 1;
+}
+
+.btn-rapido {
+  background: var(--preto);
+  color: var(--branco);
+  border: none;
+  font-family: var(--font-corpo);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+.btn-rapido:hover {
+  background: var(--preto);
+  color: var(--branco);
+  outline: 1px solid var(--branco);
+}
+
+/* Info do produto */
+.produto-info {
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.produto-categoria-tag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+}
+
+.produto-nome {
+  font-family: var(--font-titulo);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--preto);
+  line-height: 1.2;
+}
+
+.produto-preco-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.produto-preco {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--preto);
+}
+
+.produto-preco-antigo {
+  font-size: 0.82rem;
+  color: var(--cinza-claro);
+  text-decoration: line-through;
+}
+
+/* Botão adicionar */
+.btn-adicionar {
+  margin-top: auto;
+  padding-top: 0.8rem;
+}
+
+.btn-adicionar button {
+  width: 100%;
+  background: transparent;
+  color: var(--branco);
+  border: 1px solid var(--borda-hover);
+  font-family: var(--font-corpo);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.btn-adicionar button:hover {
+  background: var(--branco);
+  color: var(--preto);
+  border-color: var(--branco);
+}
+
+/* =====================================================
+   SEM PRODUTOS
+===================================================== */
+.sem-produtos {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--cinza-claro);
+}
+
+.sem-produtos i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+.sem-produtos h2 {
+  font-family: var(--font-titulo);
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  color: var(--branco);
+  margin-bottom: 0.5rem;
+}
+
+.sem-produtos p {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+  background: #f5f5f5;
+  color: black;
+  margin-top: 50px;
+  min-height: 70vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box {
+  margin: 20px;
+}
+
+.footer-box h2 {
+  margin-bottom: 15px;
+}
+
+.footer-box a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.footer-box a:hover {
+  color: gray;
+}
+
+.footer-copy {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+}
+
+footer {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  text-align: center;
+  padding: 60px 0;
+  margin-top: 50px;
+  font-size: 18px;
+  height: 220px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+/* =========================================================
+   MOBILE — CARDS HORIZONTAIS
+   ESTILO STORIES, MAS COM INFORMAÇÕES ABAIXO DA IMAGEM
+========================================================= */
+
+@media (max-width: 768px) {
+  .produtos-logo img {
+    width: 80px;
+    object-fit: cover;
+  }
+  .produtos-nav {
+    padding: 0 1.2rem;
+    height: 75px;
+  }
+
+  .produtos-menu {
+    display: none;
+  }
+
+  .produtos-main {
+    padding: 0 1.2rem 4rem;
+  }
+
+  .produtos-intro {
+    margin-top: 50px;
+    padding: 2.5rem 0 1.8rem;
+  }
+
+  .produtos-pesquisa input {
+    height: 35px;
+  }
+
+  .produtos-filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .produtos-filtro-categoria select {
+    width: 100%;
+  }
+
+  /* =====================================================
+     LISTA — DESLIZE HORIZONTAL
+  ===================================================== */
+
+  .lista-produtos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    gap: 14px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    width: 100%;
+
+    padding: 10px 4px 20px;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .lista-produtos::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* =====================================================
+     CARD
+  ===================================================== */
+
+  .lista-produtos .produto-card {
+    flex: 0 0 170px;
+
+    width: 170px;
+    min-width: 170px;
+
+    height: auto;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition: transform 0.3s ease;
+  }
+
+  .lista-produtos .produto-card:hover {
+    transform: translateY(-3px);
+  }
+
+  /* =====================================================
+     IMAGEM
+  ===================================================== */
+
+  .lista-produtos .produto-imagem {
+    width: 100%;
+
+    height: 190px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #f5f5f5;
+  }
+
+  .lista-produtos .produto-imagem img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+  }
+
+  /* =====================================================
+     BADGE
+  ===================================================== */
+
+  .lista-produtos .produto-badge {
+    position: absolute;
+
+    top: 8px;
+    left: 8px;
+
+    z-index: 5;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    color: #111;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+  }
+
+  /* =====================================================
+     INFORMAÇÕES
+  ===================================================== */
+
+  .lista-produtos .produto-info {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    z-index: 2;
+
+    padding: 11px 10px 12px;
+
+    background: #ffffff;
+
+    color: #111;
+  }
+
+  /* NOME */
+
+  .lista-produtos .produto-nome {
+    font-size: 15px;
+
+    line-height: 1.2;
+
+    margin: 0 0 5px;
+
+    color: #111;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+  /* DESCRIÇÃO */
+
+  .lista-produtos .produto-descricao {
+    font-size: 10px;
+
+    line-height: 1.3;
+
+    margin: 0 0 7px;
+
+    color: #555;
+
+    text-align: left;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+  }
+
+  /* =====================================================
+     ESTRELAS
+  ===================================================== */
+
+  .lista-produtos .produto-estrelas {
+    font-size: 10px;
+
+    margin-bottom: 7px;
+
+    color: #111;
+
+    white-space: nowrap;
+  }
+
+  .lista-produtos .produto-estrelas span {
+    font-size: 9px;
+
+    color: #777;
+  }
+
+  /* =====================================================
+     PREÇO / STOCK
+  ===================================================== */
+
+  .lista-produtos .produto-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 9px;
+  }
+
+  .lista-produtos .produto-preco {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #111;
+  }
+
+  .lista-produtos .produto-stock {
+    font-size: 9px;
+
+    color: #777;
+  }
+
+  /* =====================================================
+     BOTÃO
+  ===================================================== */
+
+  .lista-produtos .btn-comprar {
+    padding: 8px 5px;
+    font-size: 10px;
+  }
+
+  .lista-produtos .btn-comprar i {
+    font-size: 9px;
+  }
+
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+
+  .footer-container {
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .footer-box {
+    margin: 14px 0;
+  }
+  .footer-box a {
+    display: inline-block;
+    margin: 2px 3px;
+  }
+}
+
+/* =========================================================
+   TELEMÓVEIS PEQUENOS
+========================================================= */
+
+@media (max-width: 420px) {
+  .lista-produtos {
+    gap: 12px;
+
+    padding-left: 2px;
+
+    padding-right: 2px;
+  }
+
+  .lista-produtos .produto-card {
+    flex: 0 0 160px;
+
+    width: 160px;
+
+    min-width: 160px;
+  }
+
+  .lista-produtos .produto-imagem {
+    height: 180px;
+  }
+
+  .lista-produtos .produto-info {
+    padding: 10px 9px 11px;
+  }
+
+  .lista-produtos .produto-nome {
+    font-size: 14px;
+  }
+
+  .lista-produtos .produto-preco {
+    font-size: 13px;
+  }
+}
+/* ── MODAL PRODUTO ── */
+#modal-produto {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#modal-produto.modal-aberto {
+  opacity: 1;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.modal-conteudo {
+  position: relative;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  gap: 0;
+  z-index: 1;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+#modal-produto.modal-aberto .modal-conteudo {
+  transform: translateY(0);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 2;
+  transition: background 0.2s;
+}
+
+.modal-fechar:hover {
+  background: #333;
+}
+
+.modal-imagem {
+  width: 45%;
+  flex-shrink: 0;
+}
+
+.modal-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.modal-info {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.modal-categoria {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.modal-nome {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.modal-descricao {
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.modal-estrelas {
+  color: #f5c518;
+  font-size: 0.95rem;
+}
+
+.modal-estrelas span {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.modal-preco {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.modal-stock {
+  font-size: 0.82rem;
+  color: #4ade80;
+}
+
+.modal-stock.esgotado {
+  color: #f87171;
+}
+
+.modal-btn-comprar {
+  margin-top: auto;
+  padding: 0.85rem 1.5rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.modal-btn-comprar:hover {
+  background: #111;
+  color: #fff;
+  outline: 1px solid #fff;
+}
+
+.modal-btn-comprar:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .modal-conteudo {
+    flex-direction: column;
+  }
+  .modal-imagem {
+    width: 100%;
+    height: auto;
+  }
+  .modal-imagem img {
+    border-radius: 8px 8px 0 0;
+  }
+  .modal-info {
+    padding: 1.2rem;
+  }
+  .modal-nome {
+    font-size: 1.5rem;
+  }
+}
+/* =========================================================
+   BOTÃO — ADICIONAR AO CARRINHO
+   PADRÃO PARA DESKTOP + TABLET + MOBILE
+========================================================= */
+
+.btn-comprar {
+  width: 100%;
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: #000000;
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+/* Hover */
+.btn-comprar:hover {
+  background-color: #222222;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Clique */
+.btn-comprar:active {
+  background-color: #000000;
+  transform: scale(0.98);
+}
+
+/* Ícone */
+.btn-comprar i {
+  font-size: 12px;
+  color: #ffffff;
+}

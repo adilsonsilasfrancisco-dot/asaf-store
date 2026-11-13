@@ -1,0 +1,332 @@
+/** @format */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.card {
+  width: 760px;
+  max-width: 100%;
+  min-height: 500px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+}
+
+/* ──lado esquerdo── */
+.esquerda {
+  position: relative;
+  width: 54%;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px 32px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.esquerda h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.esquerda p {
+  font-size: 13px;
+  color: rgba(247, 247, 247, 0.788);
+  line-height: 1.6;
+  max-width: 190px;
+}
+
+/* ── direta */
+.direita {
+  flex: 1;
+  min-width: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 36px 36px 36px 52px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.titulo h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #111111;
+  margin-bottom: 6px;
+}
+
+.divider {
+  width: 26px;
+  height: 2.5px;
+  background: #111111;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ── FORMULARIO */
+.form {
+  margin-bottom: 16px;
+}
+
+.form label {
+  display: block;
+  font-size: 11px;
+
+  color: #151515;
+  margin-bottom: 3px;
+  letter-spacing: 0.3px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #cccccc;
+  transition: border-color 0.2s;
+}
+
+.input:focus-within {
+  border-color: #111111;
+}
+
+.input input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+  padding: 6px 0;
+  color: #111111;
+  background: transparent;
+}
+
+.icon {
+  font-size: 14px;
+  color: #999999;
+  margin-left: 6px;
+}
+
+/* ── BUTTON ── */
+.btn {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 40px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.btn:hover {
+  background: #333333;
+  transform: translateY(-1px);
+}
+
+/* ── LOGIN LINK ── */
+.login-link {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #454545;
+  text-align: center;
+}
+
+.login-link a {
+  color: #111111;
+
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ── LOGOTIPO (lado esquerdo) ── */
+.esquerda {
+  justify-content: space-between;
+}
+
+.esquerda .logo {
+  padding-top: 8px;
+}
+
+.esquerda .logo img {
+  width: 120px;
+  height: auto;
+}
+
+/*=====================================================
+                RESPONSIVO
+   Do maior para o menor: 800 → 640 → 360
+   (tem de ficar no fim do ficheiro)
+=====================================================*/
+
+/* ── TABLET (até 800px) ── */
+@media (max-width: 800px) {
+  .esquerda h1 {
+    font-size: 44px;
+  }
+
+  .esquerda {
+    padding: 30px 26px;
+  }
+
+  .direita {
+    padding: 32px 28px 32px 36px;
+  }
+}
+
+/* ── TELEMÓVEL (até 640px): os dois lados ficam em coluna ── */
+@media (max-width: 640px) {
+  body {
+    padding: 14px;
+  }
+
+  .card {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* parte preta: compacta, em cima */
+  .esquerda {
+    width: 100%;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 24px 22px;
+  }
+
+  .esquerda .logo {
+    padding-top: 0;
+  }
+
+  .esquerda .logo img {
+    width: 90px;
+  }
+
+  .esquerda h1 {
+    font-size: 34px;
+    margin-bottom: 0;
+  }
+
+  .esquerda p {
+    max-width: none;
+    font-size: 13px;
+  }
+
+  /* formulário: largura total, por baixo */
+  .direita {
+    flex: none;
+    padding: 28px 22px 32px;
+  }
+
+  .titulo {
+    margin-bottom: 18px;
+  }
+
+  /* 16px evita o zoom automático no iPhone */
+  .input input {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  .form label {
+    font-size: 12px;
+  }
+
+  .btn {
+    padding: 14px;
+    font-size: 16px;
+  }
+}
+
+/* ── TELEMÓVEL MUITO PEQUENO (até 360px) ── */
+@media (max-width: 360px) {
+  body {
+    padding: 10px;
+  }
+
+  .esquerda {
+    padding: 20px 18px;
+  }
+
+  .esquerda h1 {
+    font-size: 28px;
+  }
+
+  .direita {
+    padding: 24px 18px 28px;
+  }
+
+  .titulo h2 {
+    font-size: 24px;
+  }
+}
+/* ── MENSAGENS DO FORMULÁRIO ── */
+.msg {
+  min-height: 18px;
+  margin: 12px 0 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: #454545;
+}
+
+.msg.erro {
+  color: #b3261e;
+}
+
+.msg.ok {
+  color: #1b7a3e;
+}
+
+/* ── BOTÃO MOSTRAR/ESCONDER PALAVRA-PASSE ── */
+.icon-btn {
+  margin-left: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: #111111;
+}

@@ -1,0 +1,93 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscreva-se | ASAF STORE</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="../silas.css/login.css" />
+
+    <!-- Quem já tem sessão vai direto para a loja -->
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.somenteVisitante();
+    </script>
+  </head>
+  <body>
+    <div class="card">
+      <div class="esquerda">
+        <div class="logo">
+          <a href="Loja.html">
+            <img src="../img/logotipo.png" alt="Logo" />
+          </a>
+        </div>
+        <h1>BEM-VINDO<br />À ASAF!</h1>
+        <p>
+          A loja que cuida do visual do povo. Elegância, charme e estilo só aqui
+          na ASAF
+        </p>
+      </div>
+
+      <div class="direita">
+        <div class="titulo">
+          <h2>Inscreva-se</h2>
+          <div class="divider"></div>
+        </div>
+
+        <form id="cadastroForm" novalidate>
+          <div class="form">
+            <label for="usuario">Usuário</label>
+            <div class="input">
+              <input
+                type="text"
+                id="usuario"
+                autocomplete="username"
+                required />
+              <span class="icon">&#128100;</span>
+            </div>
+          </div>
+
+          <div class="form">
+            <label for="email">Email</label>
+            <div class="input">
+              <input type="email" id="email" autocomplete="email" required />
+              <span class="icon">&#9993;</span>
+            </div>
+          </div>
+
+          <div class="form">
+            <label for="senha">Palavra passe</label>
+            <div class="input">
+              <input
+                type="password"
+                id="senha"
+                autocomplete="new-password"
+                required />
+              <button
+                type="button"
+                class="icon-btn"
+                id="verSenha"
+                aria-label="Mostrar palavra-passe">
+                &#128274;
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn">Inscreva-se</button>
+
+          <p class="msg" id="msg" role="alert" aria-live="polite"></p>
+        </form>
+
+        <p class="login-link">
+          Já tem uma conta? <a href="LOGIN.HTML">Login</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

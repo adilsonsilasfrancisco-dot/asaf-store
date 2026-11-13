@@ -1,0 +1,509 @@
+/** @format */
+/* =========================================================
+   NAVEGAÇÃO IGUAL À DA LOJA
+   Carregar DEPOIS do inicio.css
+========================================================= */
+
+/* ── NAV1 (topo transparente) ── */
+.nav1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 80px;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: transparent;
+  transition:
+    background 0.3s ease,
+    transform 0.4s ease,
+    box-shadow 0.3s ease;
+}
+
+.scrolled .nav1 {
+  transform: translateY(-100%);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  display: block;
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── MENU PRINCIPAL ── */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 8px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    border 0.3s ease;
+}
+
+.menu a:hover {
+  color: #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* carrinho: texto no desktop, só ícone no mobile */
+.carrinho-link {
+  gap: 8px;
+}
+
+.carrinho-icone {
+  display: none;
+  font-size: 18px;
+}
+
+/* ── BOTÃO ENTRAR / SAIR ── */
+#btn {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 8px 15px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: 0.4s ease;
+}
+
+#btn:hover {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+/* ── NAV2 (categorias + dropdown) ── */
+.nav2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 999;
+  background: #ffffff;
+  transform: translateY(-100%);
+  transition: 0.4s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.scrolled .nav2 {
+  transform: translateY(0);
+}
+
+.nav2 ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav2 ul li {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+.nav2 ul li > a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 22px;
+  color: #111;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.nav2 ul li > a:hover {
+  background: #f5f5f5;
+}
+
+/* ── DROPDOWN DESKTOP ── */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 20px;
+  color: #111;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    padding-left 0.2s;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background: #f5f5f5;
+  padding-left: 28px;
+}
+
+.dropdown:hover > .dropdown-content {
+  display: block;
+}
+
+.nav2 ul:hover .dropdown:not(:hover) > .dropdown-content {
+  display: none;
+}
+
+/* ── HAMBÚRGUER (escondido no desktop) ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  position: fixed;
+  top: 12px;
+  right: 20px;
+  z-index: 1100;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── MODAL E AVISO ficam por cima da navegação ── */
+.modal {
+  z-index: 3000;
+}
+
+.toast {
+  z-index: 3100;
+}
+
+/* =========================================================
+   TABLETS (até 1024px)
+========================================================= */
+@media (max-width: 1024px) {
+  .nav1 {
+    padding: 16px 24px;
+  }
+
+  .logo img {
+    width: 125px;
+    max-height: 55px;
+  }
+
+  .menu a {
+    font-size: 17px;
+    margin: 0 6px;
+  }
+
+  .nav2 ul li > a {
+    padding: 0 16px;
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   HEADER MOBILE (até 768px)
+   - Barra escura do topo: logotipo + hambúrguer branco
+   - Faixa por baixo: Início, Produtos, Minha área, Carrinho, Sair
+   - Menu de categorias abre por baixo da faixa
+========================================================= */
+@media (max-width: 768px) {
+  .nav1,
+  .scrolled .nav1 {
+    transform: none !important;
+    min-height: 56px;
+    height: 56px;
+    padding: 0 16px;
+    align-items: center;
+  }
+
+  .nav1 .logo img {
+    width: 90px;
+    max-height: 40px;
+    object-fit: contain;
+  }
+
+  /* faixa de links */
+  .menu {
+    display: flex !important;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    padding: 0 12px;
+    background: #111111;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    z-index: 1090;
+  }
+
+  .menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu a {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 6px 10px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    border-bottom: none;
+  }
+
+  .menu a:hover {
+    border-bottom: none;
+    color: #f0f0f0;
+  }
+
+  .menu #btn {
+    background-color: transparent;
+    color: white;
+    margin-left: auto;
+    padding: 5px 14px;
+    font-size: 14px;
+  }
+
+  /* carrinho: só o ícone (com o contador) */
+  .carrinho-texto {
+    display: none;
+  }
+
+  .carrinho-icone {
+    display: inline-block;
+  }
+
+  .carrinho-link {
+    gap: 5px;
+  }
+
+  /* hambúrguer branco */
+  .hamburger {
+    display: flex;
+    z-index: 1200;
+  }
+
+  .hamburger span {
+    background: #ffffff;
+  }
+
+  /* barra escura sempre visível */
+  .nav2,
+  .scrolled .nav2 {
+    transform: none !important;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    background: #111111;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* menu de categorias (abre por baixo da faixa) */
+  .nav2 ul {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    top: 96px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1050;
+    padding: 8px 0 20px;
+  }
+
+  .nav2 ul.open {
+    display: flex;
+  }
+
+  .nav2 ul li {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .nav2 ul li > a {
+    width: 100%;
+    height: auto;
+    min-height: 52px;
+    padding: 14px 24px;
+    font-size: 17px;
+    color: #111111;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav2 ul li.dropdown > a::after {
+    content: "▾";
+    font-size: 13px;
+    color: #999;
+    transition: transform 0.3s;
+  }
+
+  .nav2 ul li.dropdown.open > a::after {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-content {
+    display: none;
+    position: static;
+    width: 100%;
+    min-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    background: #f9f9f9;
+    border-left: 3px solid #111;
+    margin: 0;
+  }
+
+  .dropdown.open > .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover > .dropdown-content {
+    display: none;
+  }
+
+  .dropdown.open:hover > .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    width: 100%;
+    padding: 13px 32px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .dropdown-content a:hover {
+    padding-left: 40px;
+    background: #f0f0f0;
+  }
+
+  /* ── logotipo + hambúrguer juntos (menu-scroll.js) ── */
+  .menu,
+  .hamburger {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  /* menu completo visível → hambúrguer invisível */
+  body:not(.nav-hidden) .hamburger {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.6);
+  }
+
+  /* a descer → esconde só a faixa de links */
+  body.nav-hidden .menu {
+    opacity: 0;
+    transform: translateY(-14px);
+    pointer-events: none;
+  }
+
+  /* a descer → hambúrguer aparece ao lado do logotipo */
+  body.nav-hidden .hamburger {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  /* sem a faixa, a lista de categorias abre logo abaixo da barra */
+  body.nav-hidden .nav2 ul {
+    top: 56px;
+    max-height: calc(100vh - 56px);
+  }
+}
+
+/* =========================================================
+   TELEMÓVEIS PEQUENOS
+========================================================= */
+@media (max-width: 500px) {
+  .hamburger {
+    top: 9px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hamburger {
+    right: 8px;
+  }
+}

@@ -1,0 +1,92 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A minha área | ASAF STORE</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="../silas.css/minha-area.css" />
+
+    <!-- Página só para quem tem sessão -->
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.exigir();
+    </script>
+  </head>
+  <body>
+    <header class="topo">
+      <a href="minha-area.html" class="topo-logo">
+        <img src="../img/logotipo.png" alt="ASAF STORE" />
+      </a>
+
+      <nav class="topo-menu">
+        <a href="Loja.html">Loja</a>
+        <a href="Produtos.html">Produtos</a>
+        <a href="carrinho.html">
+          Carrinho <span id="contadorCarrinho">0</span>
+        </a>
+        <button type="button" id="btnSair">Sair</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="hero-data" id="dataHoje"></p>
+        <h1><span id="saudacao">Olá</span>, <span id="nomeUsuario"></span></h1>
+        <p class="hero-texto">
+          Bom ter-te de volta à ASAF. Elegância, charme e estilo à tua espera.
+        </p>
+        <div class="hero-botoes">
+          <a class="btn btn-claro" href="Produtos.html">
+            Continuar a comprar
+          </a>
+          <a class="btn btn-escuro" href="carrinho.html">
+            Ver carrinho
+          </a>
+        </div>
+      </section>
+
+      <section class="resumo">
+        <div class="resumo-card">
+          <span>No carrinho</span>
+          <strong id="resItens">0</strong>
+          <small id="resTotal">0 Kz</small>
+        </div>
+        <div class="resumo-card">
+          <span>Produtos na loja</span>
+          <strong id="resProdutos">0</strong>
+          <small>disponíveis</small>
+        </div>
+        <div class="resumo-card">
+          <span>Membro desde</span>
+          <strong id="resDesde">—</strong>
+          <small id="resEmail"></small>
+        </div>
+      </section>
+
+      <section class="bloco">
+        <h2>Novidades para ti</h2>
+        <div class="grelha" id="novidades"></div>
+      </section>
+
+      <section class="bloco">
+        <div class="bloco-topo">
+          <h2>O teu carrinho</h2>
+          <a href="carrinho.html">Ver tudo</a>
+        </div>
+        <div id="carrinhoLista"></div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      © 2026 ASAF STORE. Todos os direitos reservados.
+    </footer>
+
+    <script src="../silas.Js/minha-area.js"></script>
+  </body>
+</html>

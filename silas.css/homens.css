@@ -1,0 +1,138 @@
+/** @format */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Bebas Neue", sans-serif;
+}
+h1,
+p {
+  text-align: center;
+
+  font-family: "Bebas Neue", sans-serif;
+}
+.container {
+  margin-top: 50px;
+  display: flex;
+
+  background-color: #f5f5f5;
+  flex-wrap: nowrap;
+}
+.card {
+  width: 700px;
+  height: 600px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.card img {
+  width: 100%;
+  object-fit: cover;
+}
+.logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+.nav1 {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: var(--black);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  align-items: center;
+  height: 85px;
+  transition: 0.4s ease;
+  background: black;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.menu a {
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 18px;
+  color: #ffffff;
+  font-family: "Bebas Neue", sans-serif;
+}
+.menu a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+
+.Principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.card1 {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+.card1 img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 200px;
+  border-radius: 20px;
+}
+.card1:hover {
+  transform: translateY(-10px);
+}
+
+.footer {
+  background: #f5f5f5;
+  color: black;
+  margin-top: 50px;
+  min-height: 70vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box {
+  margin: 20px;
+}
+
+.footer-box h2 {
+  margin-bottom: 15px;
+}
+
+.footer-box a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.footer-box a:hover {
+  color: gray;
+}
+
+.footer-copy {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+}

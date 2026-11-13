@@ -1,0 +1,107 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acessórios | ASAF STORE</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+      <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../silas.css/acessorios.css" />
+
+    <!-- Página só para quem tem sessão -->
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.exigir();
+    </script>
+  </head>
+  <body>
+    <header class="topo">
+      <a href="inicio.html" class="topo-logo">
+        <img src="../img/logotipo.png" alt="ASAF STORE" />
+      </a>
+
+      <nav class="topo-menu">
+        <a href="inicio.html">Início</a>
+        <a href="Produtos.html">Produtos</a>
+        <a href="acessorios.html" class="ativo">Acessórios</a>
+        <a href="SOBRE.HTML">Sobre</a>
+        <a href="CONTATO.html">Contacto</a>
+      </nav>
+
+      <div class="topo-acoes">
+        <a href="carrinho.html" class="carrinho">
+          Carrinho <span id="contadorCarrinho">0</span>
+        </a>
+        <a href="LOGIN.HTML" id="btn">Entrar</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="hero-label">Coleção</span>
+        <h1>Acessórios</h1>
+        <p>
+          Relógios, pulseiras, óculos e detalhes que fazem a diferença no teu
+          visual.
+        </p>
+      </section>
+
+      <section class="vitrine">
+        <div class="ferramentas">
+          <input
+            type="search"
+            id="pesquisa"
+            placeholder="Pesquisar acessório..."
+            autocomplete="off" />
+          <div class="chips" id="chips"></div>
+        </div>
+
+        <p class="contagem" id="contagem"></p>
+
+        <div class="grelha" id="listaAcessorios"></div>
+
+        <div class="vazio" id="semProdutos" hidden>
+          <h2>Nenhum acessório encontrado</h2>
+          <p id="semTexto"></p>
+          <a href="Produtos.html">Ver todos os produtos</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="rodape-colunas">
+        <div>
+          <h3>ASAF STORE</h3>
+          <p>Moda, estilo e conforto para si.</p>
+        </div>
+
+        <div>
+          <h3>Links</h3>
+          <a href="inicio.html">Início</a>
+          <a href="Produtos.html">Produtos</a>
+          <a href="SOBRE.HTML">Sobre</a>
+          <a href="CONTATO.html">Contacto</a>
+        </div>
+
+        <div>
+          <h3>Contactos</h3>
+          <p>+244 943 233 053</p>
+          <p>ASAFmoda@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="rodape-copy">
+        © 2026 ASAF STORE. Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <script src="../silas.Js/acessorios.js"></script>
+  </body>
+</html>

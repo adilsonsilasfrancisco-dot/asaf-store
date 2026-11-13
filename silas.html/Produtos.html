@@ -1,0 +1,225 @@
+<!-- @format -->
+
+<!doctype html>
+
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Produtos ASAF</title>
+
+    <link rel="stylesheet" href="../silas.css/produtos2.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.exigir();
+    </script>
+  </head>
+
+  <body>
+    <header class="produtos-header">
+      <nav class="produtos-nav">
+        <div class="produtos-logo">
+          <a href="Loja.html">
+            <img src="../img/logotipo.png" alt="ASAF STORE" />
+          </a>
+        </div>
+
+        <div class="produtos-menu">
+          <a href="Loja.html"> Início </a>
+
+          <a href="SOBRE.HTML"> Sobre </a>
+
+          <a href="CONTATO.html"> Contacto </a>
+        </div>
+
+        <div class="produtos-acoes">
+          <a href="carrinho.html" class="carrinho-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <span id="contadorCarrinho">0</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="produtos-main">
+      <section class="produtos-intro">
+        <span class="produtos-subtitulo"> ASAF </span>
+
+        <h1>Nossos Produtos</h1>
+
+        <p>Encontre produtos selecionados para o seu estilo.</p>
+      </section>
+
+      <!-- =================================================
+       PESQUISA / FILTROS
+  ================================================== -->
+
+      <section class="produtos-filtros">
+        <div class="produtos-pesquisa">
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input
+            type="text"
+            id="pesquisaProduto"
+            placeholder="Pesquisar produto..." />
+        </div>
+
+        <div class="produtos-filtro-categoria">
+          <select id="filtroCategoria">
+            <option value="todos">Todas as categorias</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- =================================================
+       CATEGORIAS
+  ================================================== -->
+
+      <section class="categoria-produtos">
+        <!-- RELÓGIOS -->
+        <div class="categoria-secao" data-categoria="Relógios">
+          <div class="categoria-cabecalho">
+            <div>
+              <span class="categoria-label"> COLEÇÃO </span>
+
+              <h2>
+                <i class="fa-solid fa-clock"></i>
+                Relógios
+              </h2>
+            </div>
+          </div>
+
+          <div id="listaRelogios" class="lista-produtos"></div>
+        </div>
+
+        <!-- TÉNIS -->
+        <div class="categoria-secao" data-categoria="Ténis">
+          <div class="categoria-cabecalho">
+            <div>
+              <span class="categoria-label"> COLEÇÃO </span>
+
+              <h2>
+                <i class="fa-solid fa-shoe-prints"></i>
+                Ténis
+              </h2>
+            </div>
+          </div>
+
+          <div id="listaTenis" class="lista-produtos"></div>
+        </div>
+
+        <!-- VESTUÁRIO -->
+        <div class="categoria-secao" data-categoria="Vestuário">
+          <div class="categoria-cabecalho">
+            <div>
+              <span class="categoria-label"> COLEÇÃO </span>
+
+              <h2>
+                <i class="fa-solid fa-shirt"></i>
+                Vestuário
+              </h2>
+            </div>
+          </div>
+
+          <div id="listaVestuario" class="lista-produtos"></div>
+        </div>
+
+        <!-- ACESSÓRIOS -->
+        <div class="categoria-secao" data-categoria="Acessórios">
+          <div class="categoria-cabecalho">
+            <div>
+              <span class="categoria-label"> COLEÇÃO </span>
+
+              <h2>
+                <i class="fa-solid fa-gem"></i>
+                Acessórios
+              </h2>
+            </div>
+          </div>
+
+          <div id="listaAcessorios" class="lista-produtos"></div>
+        </div>
+
+        <!-- OUTROS PRODUTOS
+         O JS poderá colocar aqui categorias
+         que não tenham uma seção específica. -->
+
+        <div class="categoria-secao" id="secaoOutros">
+          <div class="categoria-cabecalho">
+            <div>
+              <span class="categoria-label"> MAIS PRODUTOS </span>
+
+              <h2>
+                <i class="fa-solid fa-box-open"></i>
+                Outros Produtos
+              </h2>
+            </div>
+          </div>
+
+          <div id="listaOutros" class="lista-produtos"></div>
+        </div>
+      </section>
+
+      <!-- =================================================
+       MENSAGEM SEM PRODUTOS
+  ================================================== -->
+
+      <section id="semProdutos" class="sem-produtos" style="display: none">
+        <i class="fa-solid fa-box-open"></i>
+
+        <h2>Nenhum produto encontrado</h2>
+
+        <p>Tente pesquisar por outro produto ou categoria.</p>
+      </section>
+    </main>
+
+    <!-- =====================================================
+     RODAPÉ
+====================================================== -->
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-box">
+          <h2>Minha Loja</h2>
+          <p>Moda, estilo e conforto para si.</p>
+        </div>
+
+        <div class="footer-box">
+          <h2>Links</h2>
+          <a href="#">Inicio</a>
+          <a href="SOBRE.HTML">Sobre</a>
+          <a href="CONTATO.html">Contacto</a>
+        </div>
+
+        <div class="footer-box">
+          <h2>Contactos</h2>
+          <p>+244 943 233 053</p>
+          <p>ASAFmoda@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>© 2026 Minha Loja - Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+    <script src="../silas.Js/produtos2.js"></script>
+    <script src="../silas.Js/menu-scroll.js"></script>
+  </body>
+</html>

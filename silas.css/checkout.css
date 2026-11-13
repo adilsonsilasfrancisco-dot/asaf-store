@@ -1,0 +1,447 @@
+/**
+ * =====================================================
+ *    CHECKOUT - ASAF
+ * =====================================================
+ * @format
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Bebas Neue", sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+/* ========================================= */
+
+.topo {
+  width: 100%;
+  height: 90px;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+
+.logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+.topo h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+/* ========================================= */
+
+.checkout-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 35px;
+  align-items: start;
+}
+
+/* ========================================= */
+
+.checkout-left {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-right {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* REMOVIDO: height: 520px — deixa crescer conforme os produtos */
+  position: sticky;
+  top: 20px;
+}
+
+/* ========================================= */
+
+.checkout-left h2,
+.checkout-right h2 {
+  margin-bottom: 20px;
+  color: #111;
+  font-size: 24px;
+}
+
+/* ========================================= */
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.grupo label {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.grupo input,
+.grupo select,
+.grupo textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.grupo textarea {
+  resize: none;
+}
+
+.grupo input:focus,
+.grupo select:focus,
+.grupo textarea:focus {
+  border-color: #000;
+}
+
+/* ========================================= */
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 30px 0;
+}
+
+/* ========================================= */
+
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.radio-option input {
+  transform: scale(1.2);
+}
+
+/* ========================================= */
+
+/* Lista de produtos no resumo */
+.lista-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 25px;
+
+  /* Scroll se houver muitos produtos */
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
+}
+
+.lista-produtos::-webkit-scrollbar {
+  width: 4px;
+}
+.lista-produtos::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+/* ── Classe gerada pelo checkout.js ── */
+.checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Imagem do produto — tamanho fixo, nunca quebra o layout */
+.checkout-img {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Informações do produto */
+.checkout-info {
+  flex: 1;
+  min-width: 0; /* evita overflow do texto */
+}
+
+.checkout-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkout-info p {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkout-info small {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Preço do produto */
+.checkout-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Classe antiga (compatibilidade) ── */
+.item-resumo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.item-resumo img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-info h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.item-info p {
+  color: #777;
+  font-size: 13px;
+}
+
+.item-preco {
+  font-weight: bold;
+  color: #000;
+  flex-shrink: 0;
+}
+
+/* ========================================= */
+
+.linha-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.total-final {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid #ddd;
+}
+
+/* ========================================= */
+
+.btn-finalizar {
+  width: 100%;
+  margin-top: 24px;
+  padding: 16px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-finalizar:hover {
+  background: #353535;
+}
+
+.btn-finalizar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ========================================= */
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #111;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+  z-index: 9999;
+  font-size: 14px;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================= */
+
+.footer {
+  background: #f5f5f5;
+  color: black;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box {
+  margin: 20px;
+}
+
+.footer-box h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-box p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.footer-box a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.footer-box a:hover {
+  color: gray;
+}
+
+.footer-copy {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+  font-size: 13px;
+  color: #555;
+}
+
+/* ========================================= */
+
+@media (max-width: 950px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-right {
+    position: static;
+  }
+
+  .topo {
+    padding: 20px;
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .checkout-left,
+  .checkout-right {
+    padding: 20px;
+  }
+
+  .topo h1 {
+    font-size: 22px;
+  }
+
+  .btn-finalizar {
+    font-size: 15px;
+  }
+
+  .checkout-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .checkout-info h4 {
+    font-size: 13px;
+  }
+
+  .checkout-price {
+    font-size: 13px;
+  }
+
+  .lista-produtos {
+    max-height: 280px;
+  }
+}

@@ -1,0 +1,205 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ASAF Admin - Produtos</title>
+
+    <link rel="stylesheet" href="../silas.css/admin.css" />
+
+    <link rel="stylesheet" href="../silas.css/adm-produtos.css" />
+
+    <link rel="stylesheet" href="../silas.css/admin-mobile.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <a href="Loja.html">
+          <img src="../img/logotipo.png" alt="Logotipo" />
+        </a>
+      </div>
+
+      <ul>
+        <li>
+          <a href="dashboard.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li class="active">
+          <a href="#">
+            <i class="fas fa-box"></i>
+            <span>Produtos</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class="fas fa-users"></i>
+            <span>Clientes</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Encomendas</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class="fas fa-tags"></i>
+            <span>Categorias</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" onclick="logout()">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <header>
+        <div class="header">
+          <h1>Gestão de Produtos</h1>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <div class="search">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Pesquisar produto..." />
+        </div>
+
+        <select id="categoryFilter">
+          <option value="">Todas Categorias</option>
+          <option>Outras</option>
+
+          <option>Roupas</option>
+
+          <option>Calçados</option>
+
+          <option>Acessórios</option>
+        </select>
+
+        <button id="btnNovo">
+          <i class="fas fa-plus"></i>
+
+          Novo Produto
+        </button>
+      </div>
+
+      <div class="table-area">
+        <table>
+          <thead>
+            <tr>
+              <th>Imagem</th>
+
+              <th>Nome</th>
+
+              <th>Categoria</th>
+
+              <th>Preço</th>
+
+              <th>Stock</th>
+
+              <th>Estado</th>
+
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="listaProdutos"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+
+    <div class="modal" id="modalProduto">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Novo Produto</h2>
+
+          <span id="fecharModal">&times;</span>
+        </div>
+
+        <form id="produtoForm">
+          <div class="campo">
+            <label>Nome</label>
+
+            <input type="text" id="nome" required />
+          </div>
+
+          <div class="campo">
+            <label>Categoria</label>
+
+            <select id="categoria">
+              <option>Outras</option>
+              <option>Roupas</option>
+
+              <option>Calçados</option>
+
+              <option>Acessórios</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label>Preço</label>
+
+            <input type="number" id="preco" required />
+          </div>
+
+          <div class="campo">
+            <label>Quantidade</label>
+
+            <input type="number" id="stock" required />
+          </div>
+
+          <div class="campo">
+            <label>Imagem</label>
+
+            <input type="file" id="imagem" accept="image/*" />
+          </div>
+
+          <div class="preview">
+            <img id="previewImagem" alt />
+          </div>
+
+          <div class="campo">
+            <label>Descrição</label>
+
+            <textarea id="descricao" rows="5"></textarea>
+          </div>
+
+          <button type="submit" class="salvar">Guardar Produto</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../silas.Js/adm-produto.js"></script>
+  </body>
+</html>

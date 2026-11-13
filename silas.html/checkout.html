@@ -1,0 +1,353 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Checkout | ASAF</title>
+
+    <link rel="stylesheet" href="../silas.css/checkout.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../silas.Js/auth.js"></script>
+<script>
+  Auth.exigir();
+</script>
+  </head>
+
+  <body>
+    <header class="topo">
+      <div class="logo">
+        <a href="Loja.html">
+        <img src="../img/logotipo.png" alt="" /></a>
+      </div>
+
+      <h1>Finalizar Compra</h1>
+    </header>
+
+    <div class="checkout-container">
+      <div class="checkout-left">
+        <h2>Dados Pessoais</h2>
+
+        <div class="grupo">
+          <label>Nome Completo *</label>
+
+          <input type="text" id="nome" />
+        </div>
+
+        <div class="grupo">
+          <label>Telefone *</label>
+
+          <input type="tel" id="telefone" />
+        </div>
+
+        <div class="grupo">
+          <label>Email *</label>
+
+          <input type="email" id="email" />
+        </div>
+
+        <hr />
+
+        <h2>Endereço de Entrega</h2>
+
+        <div class="grupo">
+          <label>Província *</label>
+
+          <select id="provincia">
+            <option value="">Selecione</option>
+
+            <option>Luanda</option>
+
+            <option>Benguela</option>
+
+            <option>Huambo</option>
+
+            <option>Bié</option>
+
+            <option>Huíla</option>
+
+            <option>Namibe</option>
+
+            <option>Malanje</option>
+
+            <option>Cabinda</option>
+
+            <option>Uíge</option>
+
+            <option>Zaire</option>
+
+            <option>Cuanza Sul</option>
+
+            <option>Cuanza Norte</option>
+
+            <option>Cunene</option>
+
+            <option>Moxico</option>
+
+            <option>Lunda Norte</option>
+
+            <option>Lunda Sul</option>
+
+            <option>Cuando Cubango</option>
+
+            <option>Bengo</option>
+          </select>
+        </div>
+
+        <div class="grupo">
+          <label>Município *</label>
+
+          <input type="text" id="municipio" />
+        </div>
+
+        <div class="grupo">
+          <label>Bairro *</label>
+
+          <input type="text" id="bairro" />
+        </div>
+
+        <div class="grupo">
+          <label>Rua *</label>
+
+          <input type="text" id="rua" />
+        </div>
+              <div class="grupo">
+
+            <label>Número da Casa *</label>
+
+            <input
+                type="text"
+                id="numero">
+
+        </div>
+
+        <div class="grupo">
+
+            <label>Ponto de Referência</label>
+
+            <textarea
+                id="referencia"
+                rows="3"
+                placeholder="Ex.: Próximo ao Banco BAI"></textarea>
+
+        </div>
+
+        <hr>
+
+        <h2>Método de Entrega</h2>
+
+        <div class="opcoes">
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="entrega"
+                    value="domicilio"
+                    checked>
+
+                Entrega ao Domicílio
+
+            </label>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="entrega"
+                    value="loja">
+
+                Levantar na Loja
+
+            </label>
+
+        </div>
+
+        <hr>
+
+        <h2>Método de Pagamento</h2>
+
+        <div class="opcoes">
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="pagamento"
+                    value="multicaixa">
+
+                Multicaixa Express
+
+            </label>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="pagamento"
+                    value="transferencia">
+
+                Transferência Bancária
+
+            </label>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="pagamento"
+                    value="referencia">
+
+                Referência
+
+            </label>
+
+            <label class="radio-option">
+
+                <input
+                    type="radio"
+                    name="pagamento"
+                    value="dinheiro">
+
+                Dinheiro na Entrega
+
+            </label>
+
+        </div>
+
+    </div>
+
+    <!-- LADO DIREITO -->
+
+    <div class="checkout-right">
+
+        <h2>Resumo da Encomenda</h2>
+
+        <div
+            id="checkout-items"
+            class="lista-produtos">
+
+            <!-- Produtos inseridos pelo checkout.js -->
+
+        </div>
+
+        <hr>
+
+        <div class="linha-total">
+
+            <span>Subtotal</span>
+
+            <strong id="subtotal">
+                0 Kz
+            </strong>
+
+        </div>
+
+        <div class="linha-total">
+
+            <span>Entrega</span>
+
+            <strong id="entrega">
+                Grátis
+            </strong>
+
+        </div>
+
+        <div class="linha-total">
+
+            <span>Desconto</span>
+
+            <strong id="desconto">
+                0 Kz
+            </strong>
+
+        </div>
+
+        <div class="linha-total total-final">
+
+            <span>Total</span>
+
+            <strong id="total">
+                0 Kz
+            </strong>
+
+        </div>
+
+        <button
+            id="btn-finalizar"
+            class="btn-finalizar">
+
+            FINALIZAR COMPRA
+
+        </button>
+
+    </div>
+
+</div>
+</div>
+    </div>
+        <!-- TOAST -->
+
+    <div id="toast" class="toast"></div>
+
+    <!-- RODAPÉ -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+
+                <h2>ASAF</h2>
+
+                <p>
+                    Moda, estilo e conforto para si.
+                </p>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h2>Links</h2>
+
+                <a href="Loja.html">Início</a>
+                <a href="Produtos.html">Produtos</a>
+                <a href="carrinho.html">Carrinho</a>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h2>Contactos</h2>
+
+                <p>+244 943 233 053</p>
+
+                <p>ASAFmoda@gmail.com</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+
+            © 2026 ASAF — Todos os direitos reservados.
+
+        </div>
+
+    </footer>
+
+    <!-- JavaScript -->
+
+    
+    <script src="../silas.Js/checkout.js"></script>
+</body>
+</html>
+ 

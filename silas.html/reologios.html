@@ -1,0 +1,232 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ASAF| Relógios</title>
+
+    <link rel="stylesheet" href="../silas.css/relogios.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.exigir();
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="nav1">
+        <div class="logo">
+          <a href="Loja.html">
+            <img src="../img/logotipo.png" alt="Logotipo" />
+          </a>
+        </div>
+
+        <div class="menu">
+          <a href="Loja.html">Início</a>
+
+          <a href="Produtos.html">Produtos</a>
+
+          <a href="carrinho.html">Carrinho</a>
+
+          <a href="CONTATO.html">Contacto</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="destaques">
+      <h1>Vitrine de Relógios</h1>
+
+      <div class="cards">
+        <!-- PRODUTO 1 -->
+
+        <div
+          class="card3"
+          data-id="R001"
+          data-categoria="Relógios"
+          data-nome="Relógio Inteligente"
+          data-preco="45000"
+          data-imagem="https://tse4.mm.bing.net/th/id/OIP.v9a71thnysbiZIX3tBNdgAHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3"
+          data-descricao="Relógio inteligente com Bluetooth e monitor cardíaco.">
+          <img
+            src="https://tse4.mm.bing.net/th/id/OIP.v9a71thnysbiZIX3tBNdgAHaHa?cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Relógio Inteligente" />
+
+          <h2>Relógio Inteligente</h2>
+
+          <p>Bluetooth • Monitor cardíaco</p>
+
+          <span class="preco">45.000 Kz</span>
+          <button onclick="adicionarCarrinho(12)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 2 -->
+
+        <div
+          class="card3"
+          data-id="R002"
+          data-categoria="Relógios"
+          data-nome="Relógio de Mergulho"
+          data-preco="50000"
+          data-imagem="https://www.bernywatch.com/cdn/shop/files/AM339MS-A.webp?crop=center&height=1200&v=1698981610&width=1200"
+          data-descricao="Relógio resistente à água para mergulho.">
+          <img
+            src="https://www.bernywatch.com/cdn/shop/files/AM339MS-A.webp?crop=center&height=1200&v=1698981610&width=1200"
+            alt="Relógio de Mergulho" />
+
+          <h2>Relógio de Mergulho</h2>
+
+          <p>Resistente à água</p>
+
+          <span class="preco">50.000 Kz</span>
+          <button onclick="adicionarCarrinho(13)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 3 -->
+
+        <div
+          class="card3"
+          data-id="R003"
+          data-categoria="Relógios"
+          data-nome="Relógio Luxuoso"
+          data-preco="25000"
+          data-imagem="https://mambos.com.br/wp-content/uploads/2019/09/CURREN-Homens-de-Neg-cios-Rel-gio-de-Pulso-Cron-grafo-de-A-o-Inoxid-vel-6-800x800.jpg"
+          data-descricao="Relógio premium em aço inox.">
+          <img
+            src="https://mambos.com.br/wp-content/uploads/2019/09/CURREN-Homens-de-Neg-cios-Rel-gio-de-Pulso-Cron-grafo-de-A-o-Inoxid-vel-6-800x800.jpg"
+            alt="Relógio Luxuoso" />
+
+          <h2>Relógio Luxuoso</h2>
+
+          <p>Modelo Premium</p>
+
+          <span class="preco">25.000 Kz</span>
+
+          <button onclick="adicionarCarrinho(14)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 4 -->
+
+        <div
+          class="card3"
+          data-id="R004"
+          data-categoria="Relógios"
+          data-nome="Relógio de Aço"
+          data-preco="35000"
+          data-imagem="https://http2.mlstatic.com/D_NQ_NP_749569-MLU76895088744_062024-O.webp"
+          data-descricao="Elegância e resistência em aço inoxidável.">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_749569-MLU76895088744_062024-O.webp"
+            alt="Relógio de Aço" />
+
+          <h2>Relógio de Aço</h2>
+
+          <p>Aço Inoxidável</p>
+
+          <span class="preco">35.000 Kz</span>
+          <button onclick="adicionarCarrinho(15)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 5 -->
+
+        <div
+          class="card3"
+          data-id="R005"
+          data-categoria="Relógios"
+          data-nome="Relógio Minimalista"
+          data-preco="45000"
+          data-imagem="https://ae01.alicdn.com/kf/H393d7c2493c047669efe665142da62bfZ.jpg"
+          data-descricao="Design minimalista moderno.">
+          <img
+            src="https://ae01.alicdn.com/kf/H393d7c2493c047669efe665142da62bfZ.jpg"
+            alt="Relógio Minimalista" />
+
+          <h2>Relógio Minimalista</h2>
+
+          <p>Design moderno</p>
+
+          <span class="preco">45.000 Kz</span>
+          <button onclick="adicionarCarrinho(16)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 6 -->
+
+        <div
+          class="card3"
+          data-id="R006"
+          data-categoria="Relógios"
+          data-nome="Relógio Estilo Urbano"
+          data-preco="45000"
+          data-imagem="https://www.bijou-homme.com/wp-content/uploads/2020/08/HTB1M5zOzyCYBuNkHFCcq6AHtVXa5-600x600.jpg"
+          data-descricao="Relógio casual para o dia a dia.">
+          <img
+            src="https://www.bijou-homme.com/wp-content/uploads/2020/08/HTB1M5zOzyCYBuNkHFCcq6AHtVXa5-600x600.jpg"
+            alt="Relógio Estilo Urbano" />
+
+          <h2>Estilo Urbano</h2>
+
+          <p>Casual</p>
+
+          <span class="preco">45.000 Kz</span>
+
+          <button onclick="adicionarCarrinho(17)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 7 -->
+
+        <div
+          class="card3"
+          data-id="R007"
+          data-categoria="Relógios"
+          data-nome="Relógio Esportivo"
+          data-preco="45000"
+          data-imagem="https://xploudshop.com/wp-content/uploads/2021/09/product-image-203498733.jpg"
+          data-descricao="Ideal para desporto e atividades físicas.">
+          <img
+            src="https://xploudshop.com/wp-content/uploads/2021/09/product-image-203498733.jpg"
+            alt="Relógio Esportivo" />
+
+          <h2>Relógio Esportivo</h2>
+
+          <p>Modelo Fitness</p>
+
+          <span class="preco">45.000 Kz</span>
+
+          <button onclick="adicionarCarrinho(18)">Comprar</button>
+        </div>
+
+        <!-- PRODUTO 8 -->
+
+        <div
+          class="card3"
+          data-id="R008"
+          data-categoria="Relógios"
+          data-nome="Relógio de Couro"
+          data-preco="45000"
+          data-imagem="https://i.pinimg.com/originals/a1/c3/d4/a1c3d4aa1066d85638fe7e312f1d00dd.jpg"
+          data-descricao="Pulseira em couro legítimo.">
+          <img
+            src="https://i.pinimg.com/originals/a1/c3/d4/a1c3d4aa1066d85638fe7e312f1d00dd.jpg"
+            alt="Relógio de Couro" />
+
+          <h2>Relógio de Couro</h2>
+
+          <p>Couro Premium</p>
+
+          <span class="preco">45.000 Kz</span>
+
+          <button onclick="adicionarCarrinho(19)">Comprar</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="../silas.Js/produtos2.js"></script>
+  </body>
+</html>

@@ -1,0 +1,803 @@
+/** @format */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f4f4f4;
+  color: #111;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+}
+
+/* ── TOPO ── */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  padding: 0 5%;
+  background: #111;
+}
+
+.topo-logo img {
+  display: block;
+  width: 110px;
+}
+
+.topo-menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.topo-menu a,
+.topo-menu button {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.topo-menu a:hover,
+.topo-menu button:hover,
+.topo-menu a.ativo {
+  color: #bbb;
+}
+
+/* carrinho: texto no desktop, só ícone no mobile */
+.carrinho-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carrinho-icone {
+  display: none;
+  font-size: 18px;
+}
+
+#contadorCarrinho {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── CARROSSEL ── */
+.slider {
+  position: relative;
+  height: 72vh;
+  min-height: 440px;
+  overflow: hidden;
+  background: #111;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.15));
+}
+
+.slide.ativo {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide-texto {
+  position: relative;
+  max-width: 560px;
+  color: #fff;
+}
+
+.slide-texto span {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ddd;
+}
+
+.slide-texto h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(44px, 7vw, 92px);
+  line-height: 1;
+}
+
+.slide-texto p {
+  margin-bottom: 24px;
+  color: #eee;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: 0.3s;
+}
+
+.seta:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.seta-esq {
+  left: 20px;
+}
+
+.seta-dir {
+  right: 20px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.dots button {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dots button.ativo {
+  width: 28px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* ── FAIXA ── */
+.faixa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 5%;
+  background: #111;
+  color: #fff;
+}
+
+.faixa p {
+  font-size: 15px;
+}
+
+.cupao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 10px 16px;
+  border: 1.5px dashed #fff;
+  border-radius: 10px;
+}
+
+.cupao span {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #bbb;
+}
+
+.cupao strong {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.cupao small {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.cupao button {
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cupao button:hover {
+  background: #ddd;
+}
+
+/* ── DESTAQUES ── */
+.bloco {
+  padding: 56px 5% 0;
+}
+
+.bloco-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.bloco h2 {
+  font-size: 38px;
+}
+
+.bloco-topo a {
+  border-bottom: 2px solid #111;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.chips button {
+  padding: 7px 18px;
+  border: 1.5px solid #111;
+  border-radius: 999px;
+  background: transparent;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chips button.ativo,
+.chips button:hover {
+  background: #111;
+  color: #fff;
+}
+
+.grelha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ── CARDS ── */
+.item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.item:hover {
+  transform: translateY(-6px);
+}
+
+.item img {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background: #e5e5e5;
+}
+
+.item-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 14px 16px 18px;
+}
+
+.item-info small {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.item-info b {
+  display: block;
+  margin: 2px 0 8px;
+  font-size: 15px;
+}
+
+/* preço e stock SEMPRE na mesma linha */
+.item-rodape {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.item-preco {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.item-stock {
+  font-size: 12px;
+  color: #2f8f4e;
+  white-space: nowrap;
+}
+
+.item-stock.esgotado {
+  color: #c0392b;
+}
+
+/* ── BOTÃO ADICIONAR AO CARRINHO (igual ao da página de produtos) ── */
+.btn-comprar {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: #000000;
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-comprar:hover {
+  background-color: #222222;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-comprar:disabled {
+  background-color: #cccccc;
+  color: #777777;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.vazio {
+  grid-column: 1 / -1;
+  padding: 28px;
+  background: #fff;
+  border-radius: 14px;
+  text-align: center;
+  color: #666;
+}
+
+.rodape {
+  margin-top: 64px;
+  padding: 28px 5%;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 99;
+  max-width: 320px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 720px) {
+  .topo {
+    padding: 0 4%;
+  }
+
+  .topo-menu {
+    gap: 14px;
+  }
+
+  .topo-menu a,
+  .topo-menu button {
+    font-size: 16px;
+  }
+
+  .topo-logo img {
+    width: 90px;
+  }
+
+  /* carrinho: só o ícone (com o contador) */
+  .carrinho-texto {
+    display: none;
+  }
+
+  .carrinho-icone {
+    display: inline-block;
+  }
+
+  .carrinho-link {
+    gap: 5px;
+  }
+
+  .slider {
+    height: 62vh;
+    min-height: 380px;
+  }
+
+  .seta {
+    display: none;
+  }
+
+  .bloco h2 {
+    font-size: 30px;
+  }
+
+  .grelha {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* card igual ao da página de produtos */
+  .item {
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .item:hover {
+    transform: translateY(-3px);
+  }
+
+  .item img {
+    height: 190px;
+  }
+
+  /* menos espaço lateral = botão mais comprido */
+  .item-info {
+    padding: 12px 10px 12px;
+  }
+
+  .item-preco {
+    font-size: 15px;
+  }
+
+  .item-stock {
+    font-size: 11px;
+  }
+
+  .btn-comprar {
+    padding: 10px 6px;
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .toast {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .topo-menu {
+    gap: 12px;
+  }
+
+  .grelha {
+    gap: 10px;
+  }
+
+  .item-info {
+    padding: 10px 8px 10px;
+  }
+
+  .btn-comprar {
+    padding: 10px 4px;
+    font-size: 11px;
+    gap: 4px;
+  }
+}
+
+/* telemóveis pequenos: "Início" esconde-se (o logotipo já leva ao início) */
+@media (max-width: 420px) {
+  .menu-inicio {
+    display: none;
+  }
+
+  .topo-logo img {
+    width: 80px;
+  }
+}
+
+/* telemóveis estreitos: o texto do botão cabe inteiro sem o ícone */
+@media (max-width: 380px) {
+  .btn-comprar i {
+    display: none;
+  }
+
+  .item-preco {
+    font-size: 14px;
+  }
+
+  .item-stock {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 340px) {
+  .btn-comprar {
+    font-size: 10px;
+  }
+}
+/* ── MODAL DO PRODUTO ── */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.aberto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-fundo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.modal-caixa {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #111;
+  color: #fff;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal.aberto .modal-caixa {
+  transform: none;
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-fechar:hover {
+  background: #333;
+}
+
+.modal-img {
+  width: 45%;
+  flex-shrink: 0;
+  background: #222;
+}
+
+.modal-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+}
+
+.modal-cat {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.modal-info h2 {
+  font-size: 36px;
+  line-height: 1.05;
+}
+
+.modal-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #bbb;
+}
+
+.modal-preco {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.modal-stock {
+  font-size: 13px;
+  color: #4ade80;
+}
+
+.modal-stock.esgotado {
+  color: #f87171;
+}
+
+.modal-info .btn-comprar {
+  margin-top: auto;
+  padding: 13px 16px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.modal-info .btn-comprar:hover {
+  background-color: #dddddd;
+}
+
+.modal-info .btn-comprar:disabled {
+  background-color: #333333;
+  color: #777777;
+}
+
+/* ── MODAL NO MOBILE: imagem inteira, sem cortes ── */
+@media (max-width: 600px) {
+  .modal {
+    padding: 10px;
+  }
+
+  .modal-caixa {
+    flex-direction: column;
+    max-height: 94vh;
+  }
+
+  .modal-img {
+    width: 100%;
+    height: auto;
+    background: #000;
+  }
+
+  .modal-img img {
+    width: 100%;
+    height: auto;
+    max-height: 52vh;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .modal-info {
+    padding: 20px;
+  }
+
+  .modal-info h2 {
+    font-size: 30px;
+  }
+
+  .modal-preco {
+    font-size: 24px;
+  }
+}

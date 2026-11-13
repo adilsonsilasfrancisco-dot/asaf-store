@@ -1,0 +1,460 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../silas.css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../silas.css/loja.css" />
+    <link rel="stylesheet" href="../responsividade/mobile-loja.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <title>loja roupas</title>
+    <script src="../silas.Js/auth.js"></script>
+    <script>
+      Auth.vitrine();
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav class="nav1">
+        <div class="logo">
+          <img src="../img/logotipo.png" alt="Logotipo ASAF" />
+        </div>
+        <div class="menu">
+          <a href="Loja.html">Início</a>
+          <a href="Produtos.html">Produtos</a>
+          <a href="SOBRE.HTML">Sobre</a>
+          <a href="CONTATO.html">Contacto</a>
+          <a href="LOGIN.HTML" id="btn">Entrar</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+      <nav class="nav2">
+        <ul id="mobileMenu">
+          <li class="dropdown">
+            <a href="homens.html">Homens</a>
+            <div class="dropdown-content">
+              <a href="#">Camisas</a>
+              <a href="#">Calças</a>
+              <a href="#">Sapatos</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Mulheres</a>
+            <div class="dropdown-content">
+              <a href="#">Vestidos</a>
+              <a href="#">Saias</a>
+              <a href="#">Blusas</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Crianças</a>
+            <div class="dropdown-content">
+              <a href="#">Roupas</a>
+              <a href="#">Calçados</a>
+              <a href="acessorios.html">Acessórios</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="acessorios.html">Acessórios</a>
+            <div class="dropdown-content">
+              <a href="#">Joias</a>
+              <a href="reologios.html">Relógios</a>
+              <a href="#">Cintos</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#">Promoções</a>
+            <div class="dropdown-content">
+              <a href="#">Descontos</a>
+              <a href="#">Ofertas Especiais</a>
+              <a href="#">Lançamentos</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <style>
+      .carousel-item {
+        height: 100vh;
+        min-height: 500px;
+      }
+      .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .carousel-caption {
+        bottom: 50%;
+        transform: translateY(50%);
+        z-index: 2;
+      }
+      .carousel-caption h1 {
+        font-size: 4rem;
+        font-weight: bold;
+      }
+      .carousel-caption p {
+        font-size: 1.3rem;
+      }
+      @media (max-width: 768px) {
+        .carousel-caption h1 {
+          font-size: 2rem;
+          text-align: center;
+        }
+        .carousel-caption p {
+          font-size: 1rem;
+          text-align: center;
+        }
+
+        .btn {
+          margin-left: 23%;
+        }
+      }
+      .btn {
+        top: 100%;
+        left: -5%;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #000;
+        text-decoration: none;
+        border-radius: 8px;
+        width: 180px;
+        font-family: "Bebas Neue", sans-serif;
+      }
+      .btn1 {
+        top: 50%;
+        left: 7%;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #000;
+        text-decoration: none;
+        border-radius: 8px;
+        width: 180px;
+        font-family: "Bebas Neue", sans-serif;
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: #f0f0f0;
+        transition: 0.5s;
+        border: 2px solid #fff;
+      }
+      .btn1:hover {
+        background-color: transparent;
+        color: #f0f0f0;
+        transition: 0.5s;
+        border: 2px solid #fff;
+      }
+    </style>
+
+    <!-- CARROSSEL PRINCIPAL -->
+    <div
+      id="bannerCarousel"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide-to="0"
+          class="active"></button>
+        <button
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide-to="1"></button>
+        <button
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide-to="2"></button>
+        <button
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide-to="3"></button>
+        <button
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide-to="4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../img/pexels-mallonymedia-9537432.jpg" alt="" />
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1>Bem-vindo à ASAF!</h1>
+            <p style="color: white">Descubra a moda que combina com você!</p>
+
+            <a href="Produtos.html" class="btn">VER PRODUTOS!</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../img/pexels-perfect-lens-11924646.jpg" alt="" />
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1>NOVO MODELO</h1>
+            <p style="color: white">
+              Tendências que destacam tua personalidade
+            </p>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <img src="../img/pexels-brandiboy-4398341.jpg" alt="" />
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1>ALTA QUALIDADE</h1>
+            <p style="color: white">Peças elegantes para qualquer ocasião</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../img/pexels-grailify-2658558-4252950.jpg" alt="" />
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1>Promoções Especiais</h1>
+            <p style="color: white">
+              Descontos incríveis em produtos selecionados
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="../img/pexels-mallonymedia-9537431CARROSSEL.jpg" alt="" />
+          <div class="overlay"></div>
+          <div class="carousel-caption">
+            <h1>Nova Coleção 2026</h1>
+            <p style="color: #f0f0f0">Estilo moderno para homens e mulheres</p>
+            <a style="top: 80%" href="#" class="btn1">Comprar Agora</a>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#bannerCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#bannerCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <div class="colecao">
+      <h2>Nova Coleção</h2>
+      <p>
+        Explore as últimas tendências da moda com a nossa nova coleção. Roupas
+        estilosas e confortáveis para todas as ocasiões.
+      </p>
+    </div>
+
+    <!-- NOVA COLEÇÃO -->
+    <div class="container">
+      <div class="card" onclick="irParaProduto(11)" style="cursor: pointer">
+        <img src="../img/Product id_ 1005004023269991.jfif" alt="Nike" />
+      </div>
+
+      <div class="card" onclick="irParaProduto(12)" style="cursor: pointer">
+        <img
+          src="../img/Dresses for Women Cherry Print Ruched Bust Puff Sleeve Dress.jfif"
+          alt="Fato Elegante" />
+      </div>
+
+      <div class="card" onclick="irParaProduto(13)" style="cursor: pointer">
+        <img
+          src="../img/Men Short Sleeve Textured Shirt And Shorts Set, Summer.jfif"
+          alt="Jaqueta" />
+      </div>
+
+      <div class="card" onclick="irParaProduto(14)" style="cursor: pointer">
+        <img src="../img/transferir (1).jfif" alt="Jaqueta" />
+      </div>
+    </div>
+
+    <!-- PRODUTOS EM DESTAQUE -->
+    <section class="destaques">
+      <h1>Produtos em Destaque</h1>
+      <div class="cards">
+        <div class="card3" onclick="irParaProduto(1)" style="cursor: pointer">
+          <img src="../img/transferir.jfif" alt="Tênis" />
+          <h2>Estilo Urbano</h2>
+          <p>Tênis modernos para qualquer ocasião.</p>
+        </div>
+
+        <div class="card3" onclick="irParaProduto(2)" style="cursor: pointer">
+          <img src="../img/lindo 😍.jfif" alt="Tênis" />
+          <h2>Máximo Conforto</h2>
+          <p>Leveza e desempenho em cada passo.</p>
+        </div>
+
+        <div class="card3" onclick="irParaProduto(5)" style="cursor: pointer">
+          <img
+            src="../img/pexels-andrea-prochilo-3062027-36180515.jpg"
+            alt="Acessórios Femininos" />
+          <h2>Moda Feminino</h2>
+          <p>Roupa que combina com a beleza da mulher</p>
+        </div>
+
+        <div class="card3" onclick="irParaProduto(8)" style="cursor: pointer">
+          <img
+            src="../img/pexels-elena-kravets-1601294419-34150928.jpg"
+            alt="Relógio" />
+          <h2>Elegância Masculina</h2>
+          <p>Relógios e acessórios com personalidade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <div class="promo">
+      <h2 style="text-align: center; margin-top: 20px">Promoções Especiais</h2>
+      <p>
+        Aproveite nossas promoções exclusivas! Descontos incríveis tenis, roupas
+        e acessórios selecionadas. Não perca a chance de renovar seu closet com
+        estilo e economia.
+      </p>
+    </div>
+
+    <div class="Promoções">
+      <div class="container1">
+        <div class="carousel">
+          <div class="track" id="track">
+            <div
+              class="card1 active"
+              onclick="irParaProduto(6)"
+              style="cursor: pointer">
+              <img src="../img/White Air Force 1.jfif" alt="Produto 5" />
+              <div class="overlay2">
+                <h2>Passos com Estilo</h2>
+                <p>Ténis modernos para qualquer ocasião.</p>
+              </div>
+            </div>
+            <div
+              class="card1"
+              onclick="irParaProduto(10)"
+              style="cursor: pointer">
+              <img
+                src="../img/Sapatos de skate bordado floral detalhe frente com cadarço.jfif"
+                alt="Produto 4" />
+              <div class="overlay2">
+                <h2>Máximo Conforto</h2>
+                <p>Leveza em cada passo.</p>
+              </div>
+            </div>
+            <div
+              class="card1"
+              onclick="irParaProduto(7)"
+              style="cursor: pointer">
+              <img
+                src="../img/ladykleinjoias on Instagram_ Sonho de consumo todas essas semijoias no meu porta joias! ✨ 🗺 Enviamos para todo o Brasil 💳 Pagamento em até 3x sem juros nos cartões….jfif"
+                alt="Produto 6" />
+              <div class="overlay2">
+                <h2>Charme Feminino</h2>
+                <p>Acessórios elegantes para o seu visual.</p>
+              </div>
+            </div>
+            <div
+              class="card1"
+              onclick="irParaProduto(8)"
+              style="cursor: pointer">
+              <img
+                src="../img/3pcs Fashionable Versatile Men's Quartz Watch Matching Beaded Bracelet Set.jfif"
+                alt="" />
+              <div class="overlay2">
+                <h2>Elegância Masculina</h2>
+                <p>Relógios e acessórios com personalidade.</p>
+              </div>
+            </div>
+            <div
+              class="card1"
+              onclick="irParaProduto(13)"
+              style="cursor: pointer">
+              <img
+                src="../img/Men Short Sleeve Textured Shirt And Shorts Set, Summer.jfif"
+                alt="Produto 3" />
+              <div class="overlay2">
+                <h2>Moda Moderna</h2>
+                <p>Roupas Masculina com muito estilo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button id="prev">❮</button>
+            <button id="next">❯</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-container">
+        <div class="footer-box">
+          <h2>Minha Loja</h2>
+          <p>Moda, estilo e conforto para si.</p>
+        </div>
+        <div class="footer-box">
+          <h2>Links</h2>
+          <a href="#">Home</a>
+          <a href="Produtos.html">Produtos</a>
+          <a href="SOBRE.HTML">Sobre</a>
+          <a href="CONTATO.html">Contacto</a>
+        </div>
+        <div class="footer-box">
+          <h2>Contactos</h2>
+          <p>+244 943 233 053</p>
+          <p>ASAFmoda@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>© 2026 Minha Loja - Todos os direitos reservados.</p>
+      </div>
+    </div>
+
+    <script src="../silas.Js/carrinho.js"></script>
+    <script src="../silas.Js/java.js"></script>
+    <script>
+      /* CARROSSEL DE PROMOÇÕES */
+      const cards = document.querySelectorAll(".card1");
+      let current = 0;
+
+      function updateCarousel() {
+        cards.forEach(function (card1) {
+          card1.classList.remove("active");
+        });
+        cards[current].classList.add("active");
+      }
+
+      document.getElementById("next").addEventListener("click", function () {
+        current = (current + 1) % cards.length;
+        updateCarousel();
+      });
+
+      document.getElementById("prev").addEventListener("click", function () {
+        current = (current - 1 + cards.length) % cards.length;
+        updateCarousel();
+      });
+
+      setInterval(function () {
+        current = (current + 1) % cards.length;
+        updateCarousel();
+      }, 3000);
+    </script>
+
+    <script src="../silas.Js/menu.js"></script>
+    <script src="../silas.Js/bootstrap.bundle.js"></script>
+    <script src="../silas.Js/menu-scroll.js"></script>
+  </body>
+</html>

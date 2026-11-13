@@ -1,0 +1,70 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Compra Realizada | ASAF Store</title>
+
+    <link rel="stylesheet" href="../silas.css/sucesso.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="sucesso-box">
+      <div class="check">✔</div>
+
+      <h1>Compra realizada com sucesso!</h1>
+
+      <p>Obrigado por comprar na <strong>ASAF Store</strong>.</p>
+
+      <p>A tua encomenda foi registada com sucesso.</p>
+
+      <div class="dados">
+        <div>
+          <span>Código da Encomenda</span>
+
+          <strong id="codigo-encomenda"> -------- </strong>
+        </div>
+
+        <div>
+          <span>Data</span>
+
+          <strong id="data-encomenda"> -------- </strong>
+        </div>
+
+        <div>
+          <span>Estado</span>
+
+          <strong class="estado"> Pendente </strong>
+        </div>
+      </div>
+
+      <div class="botoes">
+        <a href="Loja.html" class="btn"> Continuar Comprando </a>
+
+        <a href="encomendas.html" class="btn secundario">
+          Minhas Encomendas
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const encomendas = JSON.parse(localStorage.getItem("encomendas")) || [];
+
+      if (encomendas.length) {
+        const ultima = encomendas[encomendas.length - 1];
+
+        document.getElementById("codigo-encomenda").textContent = ultima.codigo;
+
+        document.getElementById("data-encomenda").textContent = ultima.data;
+      }
+    </script>
+  </body>
+</html>

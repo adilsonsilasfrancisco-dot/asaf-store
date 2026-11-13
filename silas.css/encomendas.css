@@ -1,0 +1,446 @@
+/**
+ * =====================================================
+ *                ASAF STORE
+ *             MINHAS ENCOMENDAS
+ * =====================================================
+ *
+ * @format
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+body {
+  background: #f4f5f8;
+
+  color: #333;
+}
+
+/*======================================
+            HEADER
+======================================*/
+
+header {
+  background: #111;
+
+  color: #fff;
+
+  padding: 20px 40px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+header h1 {
+  font-size: 28px;
+}
+
+.logo img {
+  width: 120px;
+}
+
+/*======================================
+            CONTAINER
+======================================*/
+
+.container {
+  width: 90%;
+
+  max-width: 1200px;
+
+  margin: 40px auto;
+}
+
+/*======================================
+            PESQUISA
+======================================*/
+
+.topo {
+  display: flex;
+
+  gap: 15px;
+
+  margin-bottom: 30px;
+}
+
+.topo input {
+  flex: 1;
+
+  padding: 14px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.topo input:focus {
+  border-color: #000;
+}
+
+.topo button {
+  padding: 14px 30px;
+
+  background: #000;
+
+  color: #fff;
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 8px;
+
+  transition: 0.3s;
+}
+
+.topo button:hover {
+  background: #333;
+}
+
+/*======================================
+        LISTA ENCOMENDAS
+======================================*/
+
+#lista-encomendas {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+/*======================================
+        CARD DA ENCOMENDA
+======================================*/
+
+.encomenda-card {
+  background: #fff;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  transition: 0.3s;
+}
+
+.encomenda-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.encomenda-info {
+  flex: 1;
+}
+
+.encomenda-info h3 {
+  font-size: 20px;
+
+  margin-bottom: 12px;
+
+  color: #111;
+}
+
+.encomenda-info p {
+  margin: 6px 0;
+
+  color: #666;
+
+  font-size: 15px;
+}
+
+.encomenda-total {
+  text-align: right;
+}
+
+.encomenda-total h2 {
+  color: #111;
+
+  margin-bottom: 10px;
+}
+
+.ver-detalhes {
+  margin-top: 10px;
+
+  background: #000;
+
+  color: #fff;
+
+  border: none;
+
+  padding: 12px 24px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.ver-detalhes:hover {
+  background: #333;
+}
+
+/*======================================
+            ESTADOS
+======================================*/
+
+.estado {
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  color: #fff;
+}
+
+.pendente {
+  background: #f39c12;
+}
+
+.confirmada {
+  background: #3498db;
+}
+
+.preparacao {
+  background: #9b59b6;
+}
+
+.enviada {
+  background: #16a085;
+}
+
+.entregue {
+  background: #27ae60;
+}
+
+.cancelada {
+  background: #e74c3c;
+}
+
+/*======================================
+                MODAL
+======================================*/
+
+.modal {
+  display: none;
+
+  position: fixed;
+
+  left: 0;
+
+  top: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+
+  width: 90%;
+
+  max-width: 850px;
+
+  padding: 35px;
+
+  border-radius: 12px;
+
+  position: relative;
+
+  max-height: 90vh;
+
+  overflow: auto;
+}
+
+.modal-content h2 {
+  margin-bottom: 25px;
+}
+
+.fechar {
+  position: absolute;
+
+  right: 20px;
+
+  top: 15px;
+
+  font-size: 32px;
+
+  cursor: pointer;
+
+  color: #888;
+}
+
+.fechar:hover {
+  color: #000;
+}
+
+/*======================================
+        DETALHES DA ENCOMENDA
+======================================*/
+
+.detalhes {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+.detalhes div {
+  background: #f7f7f7;
+
+  padding: 18px;
+
+  border-radius: 8px;
+}
+
+.detalhes strong {
+  display: block;
+
+  color: #000;
+
+  margin-bottom: 8px;
+}
+
+.lista-produtos {
+  margin-top: 25px;
+}
+
+.produto-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.produto-item:last-child {
+  border-bottom: none;
+}
+
+/*======================================
+            RODAPÉ
+======================================*/
+
+.footer {
+  margin-top: 60px;
+
+  background: #f0f0f0;
+
+  color: #000000;
+}
+
+.footer-container {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 40px;
+
+  padding: 45px;
+}
+
+.footer-box h2 {
+  margin-bottom: 18px;
+}
+
+.footer-box a {
+  display: block;
+
+  color: #030303;
+
+  text-decoration: none;
+
+  margin: 8px 0;
+
+  transition: 0.3s;
+}
+
+.footer-box a:hover {
+  color: #636363;
+}
+
+.footer-copy {
+  text-align: center;
+
+  padding: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/*======================================
+            RESPONSIVO
+======================================*/
+
+@media (max-width: 768px) {
+  .encomenda-card {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .encomenda-total {
+    width: 100%;
+
+    text-align: left;
+  }
+
+  .topo {
+    flex-direction: column;
+  }
+
+  .detalhes {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    flex-direction: column;
+
+    gap: 15px;
+
+    text-align: center;
+  }
+}

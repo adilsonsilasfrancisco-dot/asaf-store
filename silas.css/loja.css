@@ -1,0 +1,618 @@
+/** @format */
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1,
+p,
+h2,
+a {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+/* =========================================================
+   NAV1 - TOPO TRANSPARENTE
+========================================================= */
+
+.nav1 {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  transition: 0.4s ease;
+}
+
+.scrolled .nav1 {
+  transform: translateY(-100%);
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================================
+   MENU PRINCIPAL
+========================================================= */
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu a {
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 18px;
+  color: #ffffff;
+  font-family: "Bebas Neue", sans-serif;
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    border 0.3s ease;
+}
+
+.menu a:hover {
+  color: #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* =========================================================
+   BOTÃO ENTRAR
+========================================================= */
+
+#btn {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  transition: 0.4s ease;
+}
+
+#btn:hover {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+/* =========================================================
+   NAV2 - CATEGORIAS
+========================================================= */
+
+.nav2 {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: #ffffff;
+  transform: translateY(-100%);
+  transition: 0.4s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  height: 60px;
+}
+
+.scrolled .nav2 {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   LISTA DA NAV2
+========================================================= */
+
+.nav2 ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav2 ul li {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+/* =========================================================
+   LINKS DA NAV2
+========================================================= */
+
+.nav2 ul li > a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 22px;
+  color: #111;
+  text-decoration: none;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.nav2 ul li > a:hover {
+  background: #f5f5f5;
+}
+
+/* =========================================================
+   DROPDOWN DESKTOP
+========================================================= */
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 20px;
+  color: #111;
+  text-decoration: none;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  transition:
+    background 0.2s,
+    padding-left 0.2s;
+  white-space: nowrap;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background: #f5f5f5;
+  padding-left: 28px;
+}
+
+/* =========================================================
+   ABRIR DROPDOWN NO DESKTOP
+========================================================= */
+
+.dropdown:hover > .dropdown-content {
+  display: block;
+}
+
+.nav2 ul:hover .dropdown:not(:hover) > .dropdown-content {
+  display: none;
+}
+
+/* =========================================================
+   BOTÃO HAMBÚRGUER
+========================================================= */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+  position: fixed;
+  top: 12px;
+  right: 20px;
+  z-index: 1100;
+  width: 42px;
+  height: 42px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* =========================================================
+   ANIMAÇÃO HAMBÚRGUER → X
+========================================================= */
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
+
+.conteudo {
+  width: 100%;
+  position: relative;
+}
+
+.conteudo img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+  margin-top: 50px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  flex-wrap: nowrap;
+}
+
+/* =========================================================
+   PROMOÇÕES
+========================================================= */
+
+.Promoções {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.5s;
+  padding: 20px;
+}
+
+.container1 {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+  width: 350px;
+  height: 310px;
+  background-color: #e0d1d1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 20px;
+  border: none;
+  background-position: center;
+  background-size: cover;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   CARD1 - CARROSSEL
+========================================================= */
+
+.card1 {
+  flex: 0 0 200px;
+  height: 230px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.9s ease;
+  opacity: 0.6;
+  transform: scale(0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card1.active {
+  flex: 0 0 300px;
+  height: 400px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.8s ease;
+  align-items: center;
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: white;
+}
+
+.overlay2 h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.overlay2 p {
+  opacity: 0.9;
+  color: #f0f0f0;
+}
+
+/* =========================================================
+   BOTÕES DO CARROSSEL
+========================================================= */
+
+.buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  z-index: 10;
+}
+
+.buttons button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* =========================================================
+   TEXTO PRINCIPAL
+========================================================= */
+
+#texto {
+  position: absolute;
+  top: 28%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   BOTÃO PRINCIPAL
+========================================================= */
+
+.btn {
+  position: absolute;
+  top: 70%;
+  left: 7%;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 8px;
+  width: 180px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: #f0f0f0;
+  transition: 0.5s;
+  border: 2px solid #ffffff;
+}
+
+/* =========================================================
+   COLEÇÃO
+========================================================= */
+
+.colecao h2,
+p {
+  margin-top: 20px;
+  color: #111111;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* =========================================================
+   DESTAQUES
+========================================================= */
+
+.destaques {
+  padding: 50px 8%;
+  text-align: center;
+}
+
+.destaques h1 {
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+/* =========================================================
+   CARDS DE PRODUTOS
+========================================================= */
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card3 {
+  background: white;
+  width: 240px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  padding-bottom: 20px;
+}
+
+.card3:hover {
+  transform: translateY(-10px);
+}
+
+.card3 img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card3 h2 {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.card3 p {
+  padding: 10px;
+  color: #555;
+}
+
+.card3 span {
+  display: block;
+  margin: 5px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card3 .bt {
+  padding: 12px 25px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card3 .bt:hover {
+  background: #444;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  background: #f5f5f5;
+  color: black;
+  margin-top: 50px;
+  min-height: 70vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box {
+  margin: 20px;
+}
+
+.footer-box h2 {
+  margin-bottom: 15px;
+}
+
+.footer-box a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.footer-box a:hover {
+  color: gray;
+}
+
+.footer-copy {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+}
+
+footer {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  text-align: center;
+  padding: 60px 0;
+  margin-top: 50px;
+  font-size: 18px;
+  height: 220px;
+}

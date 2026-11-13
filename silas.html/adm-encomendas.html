@@ -1,0 +1,195 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin | Encomendas</title>
+
+    <link rel="stylesheet" href="../silas.css/adm-encomendas.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="../img/logotipo.png" alt="ASAF" />
+        </div>
+
+        <ul>
+          <li>
+            <a href="dashboard.html">
+              <i class="fa-solid fa-gauge"></i>
+
+              Dashboard
+            </a>
+          </li>
+
+          <li>
+            <a href="Produtos.html">
+              <i class="fa-solid fa-box"></i>
+
+              Produtos
+            </a>
+          </li>
+
+          <li>
+            <a href="clientes.html">
+              <i class="fa-solid fa-users"></i>
+
+              Clientes
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="encomendas.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+
+              Encomendas
+            </a>
+          </li>
+
+          <li>
+            <a href="mensagens.html">
+              <i class="fa-solid fa-envelope"></i>
+
+              Mensagens
+            </a>
+          </li>
+
+          <li>
+            <a href="configuracoes.html">
+              <i class="fa-solid fa-gear"></i>
+
+              Configurações
+            </a>
+          </li>
+
+          <li>
+            <a href="Loja.html">
+              <i class="fa-solid fa-right-from-bracket"></i>
+
+              Sair
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- CONTEÚDO -->
+
+      <main class="content">
+        <div class="page-title">
+          <h1>Gestão de Encomendas</h1>
+
+          <p>Gerencie todas as encomendas realizadas pelos clientes.</p>
+        </div>
+
+        <div class="top-actions">
+          <input
+            type="text"
+            id="pesquisa"
+            placeholder="Pesquisar por código, cliente ou telefone..." />
+
+          <select id="filtroEstado">
+            <option value="">Todos os Estados</option>
+
+            <option value="Pendente">Pendente</option>
+
+            <option value="Confirmada">Confirmada</option>
+
+            <option value="Preparação">Preparação</option>
+
+            <option value="Enviada">Enviada</option>
+
+            <option value="Entregue">Entregue</option>
+
+            <option value="Cancelada">Cancelada</option>
+          </select>
+        </div>
+
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th>Código</th>
+
+              <th>Cliente</th>
+
+              <th>Telefone</th>
+
+              <th>Data</th>
+
+              <th>Total</th>
+
+              <th>Estado</th>
+
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="lista-encomendas">
+            <!-- JavaScript -->
+          </tbody>
+        </table>
+
+        <!-- MODAL -->
+
+        <div id="modal-encomenda" class="modal">
+          <div class="modal-content">
+            <span class="close" id="fecharModal"> &times; </span>
+
+            <h2>Detalhes da Encomenda</h2>
+
+            <hr />
+
+            <div id="detalhes-encomenda">
+              <!-- JavaScript -->
+            </div>
+
+            <hr />
+
+            <div class="estado-box">
+              <label> Alterar Estado </label>
+
+              <select id="novoEstado">
+                <option value="Pendente">Pendente</option>
+
+                <option value="Confirmada">Confirmada</option>
+
+                <option value="Preparação">Preparação</option>
+
+                <option value="Enviada">Enviada</option>
+
+                <option value="Entregue">Entregue</option>
+
+                <option value="Cancelada">Cancelada</option>
+              </select>
+            </div>
+
+            <div class="modal-buttons">
+              <button id="btnGuardarEstado" class="btn-success">
+                Guardar Alterações
+              </button>
+
+              <button id="btnFechar" class="btn-danger">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../silas.Js/adm-encomendas.js"></script>
+  </body>
+</html>
