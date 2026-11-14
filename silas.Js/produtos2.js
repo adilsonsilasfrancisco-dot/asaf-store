@@ -17,29 +17,50 @@
    LOCAL STORAGE
 ========================================================== */
 
-function carregarProdutos() {
+async function carregarProdutos() {
+  // No GitHub Pages, carregar os produtos do ficheiro JSON
+  if (location.hostname.endsWith("github.io")) {
+    try {
+      const resposta = await fetch("/asaf-store/produtos.json", {
+        cache: "no-store",
+      });
+
+      if (!resposta.ok) {
+        throw new Error("Não foi possível carregar produtos.json");
+      }
+
+      const lista = await resposta.json();
+
+      return Array.isArray(lista) ? lista : [];
+    } catch (erro) {
+      console.error("Erro ao carregar produtos publicados:", erro);
+      return [];
+    }
+  }
+
+  // No ambiente local, utilizar primeiro o LocalStorage
   try {
     const dados = localStorage.getItem("produtos");
 
-    if (!dados) {
-      return [];
+    if (dados) {
+      const lista = JSON.parse(dados);
+
+      if (Array.isArray(lista) && lista.length > 0) {
+        return lista;
+      }
     }
-
-    const lista = JSON.parse(dados);
-
-    return Array.isArray(lista) ? lista : [];
   } catch (erro) {
-    console.error("Erro ao carregar produtos:", erro);
-
-    return [];
+    console.error("Erro ao carregar produtos locais:", erro);
   }
+
+  return [];
 }
 
 /* ==========================================================
    PRODUTOS
 ========================================================== */
 
-let produtos = carregarProdutos();
+let produtos = [];
 
 /* ==========================================================
    ELEMENTOS
@@ -596,11 +617,11 @@ document.addEventListener("keydown", function (e) {
 
 window.addEventListener("storage", function (evento) {
   if (evento.key === "produtos") {
-    produtos = carregarProdutos();
-
-    carregarCategorias();
-
-    aplicarFiltros();
+    carregarProdutos().then((lista) => {
+      produtos = lista;
+      carregarCategorias();
+      aplicarFiltros();
+    });
   }
 
   if (evento.key === "carrinho") {
@@ -612,8 +633,8 @@ window.addEventListener("storage", function (evento) {
    INICIALIZAÇÃO
 ========================================================== */
 
-function iniciarProdutos() {
-  produtos = carregarProdutos();
+async function iniciarProdutos() {
+  produtos = await carregarProdutos();
 
   carregarCategorias();
 

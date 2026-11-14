@@ -1,7 +1,7 @@
 /** @format */
 /**
  * ==========================================================
- *            ASAF STORE - AUTENTICAÇÃO
+ *                  ASAF STORE - AUTENTICAÇÃO
  * ==========================================================
  * Registo, login, sessão e proteção de páginas.
  * Tudo é guardado no localStorage (só no navegador).
@@ -9,9 +9,14 @@
 
 const Auth = (function () {
   /* ---------- CONFIGURAÇÃO ---------- */
-  const PAGINA_LOGIN = "/silas.html/LOGIN.HTML";
-  const PAGINA_INICIAL =
-    "/silas.html/inicio.html"; /* início de quem tem sessão */
+
+  // Compatibilidade com GitHub Pages e execução local.
+  const BASE_PATH = location.hostname.endsWith("github.io")
+    ? "/asaf-store"
+    : "";
+
+  const PAGINA_LOGIN = `${BASE_PATH}/silas.html/LOGIN.HTML`;
+  const PAGINA_INICIAL = `${BASE_PATH}/silas.html/inicio.html`;
 
   const CH_USUARIOS = "usuarios";
   const CH_SESSAO = "sessao";
@@ -21,6 +26,7 @@ const Auth = (function () {
   const BLOQUEIO_MS = 30000;
 
   /* ---------- LOCAL STORAGE ---------- */
+
   function ler(chave, padrao) {
     try {
       const v = JSON.parse(localStorage.getItem(chave));
@@ -35,6 +41,7 @@ const Auth = (function () {
   }
 
   /* ---------- HASH DA PALAVRA-PASSE ---------- */
+
   function cyrb53(str, seed) {
     let h1 = 0xdeadbeef ^ seed;
     let h2 = 0x41c6ce57 ^ seed;
@@ -48,6 +55,7 @@ const Auth = (function () {
     h1 =
       Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^
       Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+
     h2 =
       Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^
       Math.imul(h1 ^ (h1 >>> 13), 3266489909);
@@ -64,6 +72,7 @@ const Auth = (function () {
   }
 
   /* ---------- UTILITÁRIOS ---------- */
+
   function normalizar(texto) {
     return String(texto || "")
       .trim()
@@ -75,6 +84,7 @@ const Auth = (function () {
   }
 
   /* ---------- SESSÃO ---------- */
+
   function sessao() {
     return ler(CH_SESSAO, null);
   }
@@ -97,7 +107,8 @@ const Auth = (function () {
     location.replace(PAGINA_LOGIN);
   }
 
-  /* Só aceita destinos dentro do próprio site */
+  /* ---------- DESTINO SEGURO ---------- */
+
   function destinoSeguro() {
     const next = new URLSearchParams(location.search).get("next");
 
@@ -115,53 +126,58 @@ const Auth = (function () {
 
   /* ---------- PROTEÇÃO DE PÁGINAS ---------- */
 
-  /* Páginas só para membros: sem sessão, vai para o login */
+  // Páginas exclusivas para membros.
   function exigir() {
     function verificar() {
       if (!logado()) {
         const atual = location.pathname + location.search + location.hash;
+
         location.replace(PAGINA_LOGIN + "?next=" + encodeURIComponent(atual));
       }
     }
 
     verificar();
 
-    /* voltar atrás no browser depois de sair */
+    // Verifica novamente ao voltar atrás no navegador.
     window.addEventListener("pageshow", function (e) {
       if (e.persisted) verificar();
     });
 
-    /* sair noutro separador */
+    // Verifica quando a sessão termina noutro separador.
     window.addEventListener("storage", function (e) {
       if (e.key === CH_SESSAO) verificar();
     });
   }
 
-  /* Loja pública (vitrine): quem já tem sessão vai para o início de membros */
+  // Vitrine: quem já tem sessão vai para o início de membros.
   function vitrine() {
     if (logado()) location.replace(PAGINA_INICIAL);
 
     window.addEventListener("pageshow", function (e) {
-      if (e.persisted && logado()) location.replace(PAGINA_INICIAL);
+      if (e.persisted && logado()) {
+        location.replace(PAGINA_INICIAL);
+      }
     });
   }
 
-  /* Páginas de login/registo: quem já entrou vai para o destino */
+  // Páginas de login/registo.
   function somenteVisitante() {
     if (logado()) location.replace(destinoSeguro());
   }
 
-  /* Manda para o login e volta ao destino depois de entrar */
+  // Solicita login e guarda o destino pretendido.
   function pedirLogin(destino) {
-    location.href =
-      PAGINA_LOGIN +
-      "?next=" +
-      encodeURIComponent(destino || location.pathname + location.search);
+    const caminho =
+      destino || location.pathname + location.search + location.hash;
+
+    location.href = PAGINA_LOGIN + "?next=" + encodeURIComponent(caminho);
   }
 
   /* ---------- BLOQUEIO POR TENTATIVAS ---------- */
+
   function segundosBloqueio() {
     const t = ler(CH_TENTATIVAS, { n: 0, ate: 0 });
+
     return t.ate > Date.now() ? Math.ceil((t.ate - Date.now()) / 1000) : 0;
   }
 
@@ -179,6 +195,7 @@ const Auth = (function () {
   }
 
   /* ---------- REGISTO ---------- */
+
   function registar(usuario, email, senha) {
     usuario = String(usuario || "").trim();
     email = String(email || "").trim();
@@ -230,6 +247,7 @@ const Auth = (function () {
   }
 
   /* ---------- LOGIN ---------- */
+
   function entrar(identificador, senha) {
     const espera = segundosBloqueio();
 
@@ -255,13 +273,14 @@ const Auth = (function () {
 
     registarFalha();
 
-    /* mesma mensagem nos dois casos: não revela se a conta existe */
     return erro("Email/usuário ou palavra-passe incorretos.");
   }
 
   /* ---------- INTERFACE ---------- */
+
   function mostrar(el, tipo, texto) {
     if (!el) return;
+
     el.className = "msg " + tipo;
     el.textContent = texto;
   }
@@ -271,16 +290,17 @@ const Auth = (function () {
     const campoSenha = document.getElementById("senha");
     const botaoVer = document.getElementById("verSenha");
 
-    /* mostrar / esconder palavra-passe */
+    // Mostrar / esconder palavra-passe.
     if (botaoVer && campoSenha) {
       botaoVer.addEventListener("click", function () {
         const vai = campoSenha.type === "password";
+
         campoSenha.type = vai ? "text" : "password";
         botaoVer.innerHTML = vai ? "&#128275;" : "&#128274;";
       });
     }
 
-    /* formulário de login */
+    // Formulário de login.
     const formLogin = document.getElementById("loginForm");
 
     if (formLogin) {
@@ -301,7 +321,7 @@ const Auth = (function () {
       });
     }
 
-    /* formulário de registo */
+    // Formulário de registo.
     const formCadastro = document.getElementById("cadastroForm");
 
     if (formCadastro) {
@@ -324,7 +344,8 @@ const Auth = (function () {
     }
   }
 
-  /* o botão "Entrar" do cabeçalho vira "Sair" quando há sessão */
+  /* ---------- BOTÃO SAIR ---------- */
+
   function ligarBotaoSair() {
     const s = sessao();
     const botao = document.getElementById("btn");
