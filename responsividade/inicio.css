@@ -49,9 +49,48 @@
     left: 12px;
     max-width: none;
   }
+  /* FOOTER MOBILE */
   .footer {
     min-height: auto;
-    padding-bottom: 30px;
+    padding: 35px 16px 25px;
+  }
+
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 12px;
+    text-align: center;
+  }
+
+  /* ASAF STORE ocupa toda a primeira linha */
+  .footer-container .footer-box:first-child {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  /* Links e Contactos ficam lado a lado */
+  .footer-container .footer-box:not(:first-child) {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-container .footer-box h2 {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .footer-container .footer-box a,
+  .footer-container .footer-box p {
+    text-align: center;
+    margin: 5px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-copy {
+    text-align: center;
+    margin-top: 25px;
   }
 
   footer {
