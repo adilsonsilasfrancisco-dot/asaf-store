@@ -5,14 +5,13 @@
 
   if (!s) return;
 
-  var PRODUTOS_URL = "/silas.html/produtos.html";
-
+  var PRODUTOS_URL = new URL("Produtos.html", document.baseURI).href;
   /* ── CARROSSEL DE MEMBROS ──
      Estas imagens NÃO estão no carrossel da Loja.html.
      Para usar as tuas, copia fotos horizontais para /img/ e troca os caminhos. */
   var SLIDES = [
     {
-      img: "/img/pexels-andrea-prochilo-3062027-36180515.jpg",
+      img: new URL("../img/loro_piana.jfif", document.baseURI).href,
       etiqueta: "Só para membros",
       titulo: "Bem-vindo à tua ASAF",
       texto: "Uma seleção pensada para quem já faz parte da casa.",
@@ -20,7 +19,7 @@
       botao: "Ver produtos",
     },
     {
-      img: "/img/pexels-elena-kravets-1601294419-34150928.jpg",
+      img: new URL("../img/nike verde.jfif", document.baseURI).href,
       etiqueta: "Acessórios",
       titulo: "Detalhes que fazem a diferença",
       texto: "Relógios, pulseiras e joias para completar o teu visual.",
@@ -28,7 +27,7 @@
       botao: "Ver acessórios",
     },
     {
-      img: "/img/Men's Solid Color Front Closure Pocket Long Sleeve Jacket, Autumn_Winter.jfif",
+      img: new URL("../img/nike vermelha.avif", document.baseURI).href,
       etiqueta: "Cupão de membro",
       titulo: "15% só para ti",
       texto: "Usa o cupão ASAF15 no carrinho e poupa na tua compra.",
@@ -36,7 +35,7 @@
       botao: "Ir ao carrinho",
     },
     {
-      img: "/img/Dresses for Women Cherry Print Ruched Bust Puff Sleeve Dress.jfif",
+      img: new URL("../img/Zara.jpg", document.baseURI).href,
       etiqueta: "Novidades",
       titulo: "Chegou o que é novo",
       texto: "Vê primeiro as últimas peças adicionadas à loja.",
@@ -229,7 +228,7 @@
   });
 
   /* ── Destaques (produtos reais, os mais recentes primeiro) ── */
-  var produtos = ler("produtos").slice().reverse();
+  var produtos = [];
   var grid = $("destaques");
   var chips = $("chips");
   var filtro = "todos";
@@ -294,27 +293,6 @@
       })
       .join("");
   }
-
-  var cats = [];
-
-  produtos.forEach(function (p) {
-    if (p.categoria && cats.indexOf(p.categoria) < 0) cats.push(p.categoria);
-  });
-
-  chips.innerHTML = ["todos"]
-    .concat(cats)
-    .map(function (c) {
-      return (
-        '<button type="button" data-cat="' +
-        esc(c) +
-        '"' +
-        (c === "todos" ? ' class="ativo"' : "") +
-        ">" +
-        (c === "todos" ? "Todos" : esc(c)) +
-        "</button>"
-      );
-    })
-    .join("");
 
   chips.addEventListener("click", function (e) {
     var b = e.target.closest("[data-cat]");
@@ -469,7 +447,60 @@
 
     if (card) abrirModal(card.dataset.id);
   });
-
-  desenhar();
   contador();
+
+  async function carregarProdutos() {
+    try {
+      var dadosLocais = ler("produtos");
+
+      var urlProdutos = new URL("../produtos.json", document.baseURI);
+
+      var resposta = await fetch(urlProdutos);
+
+      if (!resposta.ok) {
+        throw new Error("Não foi possível carregar produtos.json");
+      }
+
+      var dadosPublicados = await resposta.json();
+
+      produtos = (
+        location.hostname.endsWith("github.io") || !dadosLocais.length
+          ? dadosPublicados
+          : dadosLocais
+      )
+        .slice()
+        .reverse();
+
+      var cats = [];
+
+      produtos.forEach(function (p) {
+        if (p.categoria && cats.indexOf(p.categoria) < 0) {
+          cats.push(p.categoria);
+        }
+      });
+
+      chips.innerHTML = ["todos"]
+        .concat(cats)
+        .map(function (c) {
+          return (
+            '<button type="button" data-cat="' +
+            esc(c) +
+            '"' +
+            (c === "todos" ? ' class="ativo"' : "") +
+            ">" +
+            (c === "todos" ? "Todos" : esc(c)) +
+            "</button>"
+          );
+        })
+        .join("");
+
+      desenhar();
+    } catch (erro) {
+      console.error("Erro ao carregar produtos:", erro);
+      grid.innerHTML =
+        '<div class="vazio">Não foi possível carregar os produtos.</div>';
+    }
+  }
+
+  carregarProdutos();
 })();

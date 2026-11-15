@@ -49,4 +49,13 @@
     left: 12px;
     max-width: none;
   }
+  .footer {
+    min-height: auto;
+    padding-bottom: 30px;
+  }
+
+  footer {
+    height: auto;
+    padding: 40px 16px;
+  }
 }

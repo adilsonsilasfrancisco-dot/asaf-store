@@ -457,13 +457,53 @@ h2 {
   color: #666;
 }
 
-.rodape {
-  margin-top: 64px;
-  padding: 28px 5%;
-  border-top: 1px solid #ddd;
+.footer {
+  background: #f5f5f5;
+  color: black;
+  margin-top: 50px;
+  min-height: 70vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box {
+  margin: 20px;
+}
+
+.footer-box h2 {
+  margin-bottom: 15px;
+}
+
+.footer-box a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 8px 0;
+}
+
+.footer-box a:hover {
+  color: gray;
+}
+
+.footer-copy {
   text-align: center;
-  font-size: 13px;
-  color: #777;
+  padding: 15px;
+  border-top: 1px solid #333;
+}
+
+footer {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  text-align: center;
+  padding: 60px 0;
+  margin-top: 50px;
+  font-size: 18px;
+  height: 220px;
 }
 
 .toast {
