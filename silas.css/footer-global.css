@@ -1,0 +1,103 @@
+﻿/* =========================================================
+   FOOTER GLOBAL — ASAF STORE
+   Padrão visual baseado no rodapé de carrinho.html
+========================================================= */
+
+.footer,
+.rodape {
+  background: #f5f5f5;
+  color: #111111;
+  margin-top: 60px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Estrutura das colunas */
+.footer-container,
+.rodape-colunas {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 8%;
+}
+
+.footer-box,
+.rodape-colunas > div {
+  margin: 20px;
+}
+
+/* Títulos */
+.footer-box h2,
+.rodape-colunas h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+/* Textos e links */
+.footer-box p,
+.footer-box a,
+.rodape-colunas p,
+.rodape-colunas a {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  color: #111111;
+  text-decoration: none;
+  display: block;
+  margin: 6px 0;
+}
+
+.footer-box a:hover,
+.rodape-colunas a:hover {
+  color: #777777;
+}
+
+/* Copyright */
+.footer-copy,
+.rodape-copy {
+  text-align: center;
+  padding: 14px;
+  border-top: 1px solid #e0e0e0;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  color: #777777;
+}
+
+/* Rodapé simples da página Minha Área */
+.rodape:not(:has(.rodape-colunas)) {
+  text-align: center;
+  padding: 14px;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  color: #777777;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 600px) {
+  .footer,
+  .rodape {
+    min-height: auto;
+    padding-bottom: 20px;
+  }
+
+  .footer-container,
+  .rodape-colunas {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-box,
+  .rodape-colunas > div {
+    margin: 14px 0;
+  }
+
+  .footer-box a,
+  .rodape-colunas a {
+    display: inline-block;
+    margin: 4px 8px;
+  }
+}
