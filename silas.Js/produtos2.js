@@ -18,42 +18,42 @@
 ========================================================== */
 
 async function carregarProdutos() {
-  // No GitHub Pages, carregar os produtos do ficheiro JSON
-  if (location.hostname.endsWith("github.io")) {
+  // No ambiente local, tentar primeiro o LocalStorage
+  if (!location.hostname.endsWith("github.io")) {
     try {
-      const resposta = await fetch("/asaf-store/produtos.json", {
-        cache: "no-store",
-      });
+      const dados = localStorage.getItem("produtos");
 
-      if (!resposta.ok) {
-        throw new Error("Não foi possível carregar produtos.json");
+      if (dados) {
+        const lista = JSON.parse(dados);
+
+        if (Array.isArray(lista) && lista.length > 0) {
+          return lista;
+        }
       }
-
-      const lista = await resposta.json();
-
-      return Array.isArray(lista) ? lista : [];
     } catch (erro) {
-      console.error("Erro ao carregar produtos publicados:", erro);
-      return [];
+      console.error("Erro ao carregar produtos locais:", erro);
     }
   }
 
-  // No ambiente local, utilizar primeiro o LocalStorage
+  // Se não houver produtos locais, carregar o JSON
   try {
-    const dados = localStorage.getItem("produtos");
+    const urlProdutos = new URL("../produtos.json", document.baseURI);
 
-    if (dados) {
-      const lista = JSON.parse(dados);
+    const resposta = await fetch(urlProdutos, {
+      cache: "no-store",
+    });
 
-      if (Array.isArray(lista) && lista.length > 0) {
-        return lista;
-      }
+    if (!resposta.ok) {
+      throw new Error("Não foi possível carregar produtos.json");
     }
-  } catch (erro) {
-    console.error("Erro ao carregar produtos locais:", erro);
-  }
 
-  return [];
+    const lista = await resposta.json();
+
+    return Array.isArray(lista) ? lista : [];
+  } catch (erro) {
+    console.error("Erro ao carregar produtos:", erro);
+    return [];
+  }
 }
 
 /* ==========================================================
@@ -615,13 +615,13 @@ document.addEventListener("keydown", function (e) {
    ATUALIZAR QUANDO O LOCALSTORAGE MUDAR
 ========================================================== */
 
-window.addEventListener("storage", function (evento) {
+window.addEventListener("storage", async function (evento) {
   if (evento.key === "produtos") {
-    carregarProdutos().then((lista) => {
-      produtos = lista;
-      carregarCategorias();
-      aplicarFiltros();
-    });
+    produtos = await carregarProdutos();
+
+    carregarCategorias();
+
+    aplicarFiltros();
   }
 
   if (evento.key === "carrinho") {
@@ -649,9 +649,28 @@ async function iniciarProdutos() {
   if (produtoDestaque) {
     localStorage.removeItem("produto_destaque");
 
-    setTimeout(() => abrirModalProduto(Number(produtoDestaque)), 600);
-  }
+    let idDestaque = produtoDestaque;
 
+    try {
+      const dadosDestaque = JSON.parse(produtoDestaque);
+
+      if (dadosDestaque && typeof dadosDestaque === "object") {
+        idDestaque = dadosDestaque.id;
+      } else {
+        idDestaque = dadosDestaque;
+      }
+    } catch (erro) {
+      // Compatibilidade com IDs guardados como texto simples
+    }
+
+    const existe = produtos.some((p) => Number(p.id) === Number(idDestaque));
+
+    if (existe) {
+      setTimeout(() => abrirModalProduto(Number(idDestaque)), 600);
+    } else {
+      console.warn("Produto selecionado não encontrado:", idDestaque);
+    }
+  }
   console.log("ASAF STORE: " + produtos.length + " produtos carregados.");
 }
 

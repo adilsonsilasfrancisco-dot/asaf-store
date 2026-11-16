@@ -5,7 +5,7 @@
 
   if (!s) return;
 
-  var LOJA_PRODUTOS = "/silas.html/produtos.html";
+  var LOJA_PRODUTOS = new URL("Produtos.html", document.baseURI).href;
 
   function $(id) {
     return document.getElementById(id);
@@ -13,7 +13,13 @@
 
   function esc(t) {
     return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[c];
     });
   }
 
@@ -33,7 +39,8 @@
   /* ── Saudação e data ── */
   var h = new Date().getHours();
 
-  $("saudacao").textContent = h < 12 ? "Bom dia" : h < 19 ? "Boa tarde" : "Boa noite";
+  $("saudacao").textContent =
+    h < 12 ? "Bom dia" : h < 19 ? "Boa tarde" : "Boa noite";
   $("nomeUsuario").textContent = s.usuario;
   $("dataHoje").textContent = new Date().toLocaleDateString("pt-PT", {
     weekday: "long",
@@ -49,7 +56,10 @@
 
   $("resDesde").textContent =
     conta && conta.criadoEm
-      ? new Date(conta.criadoEm).toLocaleDateString("pt-PT", { month: "short", year: "numeric" })
+      ? new Date(conta.criadoEm).toLocaleDateString("pt-PT", {
+          month: "short",
+          year: "numeric",
+        })
       : "—";
   $("resEmail").textContent = s.email || "";
 
@@ -79,39 +89,88 @@
       .slice(0, 3)
       .map(function (p) {
         return (
-          '<div class="linha"><img src="' + esc(p.imagem) + '" alt="' + esc(p.nome) + '" />' +
-          "<div><b>" + esc(p.nome) + "</b><small>" + Number(p.quantidade || 0) + " × " + kz(p.preco) + "</small></div>" +
-          "<strong>" + kz(Number(p.preco || 0) * Number(p.quantidade || 0)) + "</strong></div>"
+          '<div class="linha"><img src="' +
+          esc(p.imagem) +
+          '" alt="' +
+          esc(p.nome) +
+          '" />' +
+          "<div><b>" +
+          esc(p.nome) +
+          "</b><small>" +
+          Number(p.quantidade || 0) +
+          " × " +
+          kz(p.preco) +
+          "</small></div>" +
+          "<strong>" +
+          kz(Number(p.preco || 0) * Number(p.quantidade || 0)) +
+          "</strong></div>"
         );
       })
       .join("");
 
     if (carrinho.length > 3) {
-      lista.innerHTML += '<p class="mais">+ ' + (carrinho.length - 3) + " produto(s) no carrinho</p>";
+      lista.innerHTML +=
+        '<p class="mais">+ ' +
+        (carrinho.length - 3) +
+        " produto(s) no carrinho</p>";
     }
   }
 
   /* ── Novidades ── */
-  var produtos = ler("produtos");
   var novidades = $("novidades");
 
-  $("resProdutos").textContent = produtos.length;
+  async function carregarNovidades() {
+    try {
+      var dadosLocais = ler("produtos");
+      var resposta = await fetch(new URL("../produtos.json", document.baseURI));
 
-  if (!produtos.length) {
-    novidades.innerHTML = '<div class="vazio">Ainda não há produtos na loja.</div>';
-  } else {
-    novidades.innerHTML = produtos
-      .slice(-4)
-      .reverse()
-      .map(function (p) {
-        return (
-          '<article class="item" data-id="' + esc(p.id) + '">' +
-          '<img src="' + esc(p.imagem) + '" alt="' + esc(p.nome) + '" loading="lazy" />' +
-          "<div><b>" + esc(p.nome) + "</b><span>" + kz(p.preco) + "</span></div></article>"
-        );
-      })
-      .join("");
+      if (!resposta.ok) {
+        throw new Error("Não foi possível carregar produtos.json");
+      }
+
+      var dadosPublicados = await resposta.json();
+
+      var produtos =
+        location.hostname.endsWith("github.io") || !dadosLocais.length
+          ? dadosPublicados
+          : dadosLocais;
+
+      $("resProdutos").textContent = produtos.length;
+
+      if (!produtos.length) {
+        novidades.innerHTML =
+          '<div class="vazio">Ainda não há produtos na loja.</div>';
+      } else {
+        novidades.innerHTML = produtos
+          .slice(-4)
+          .reverse()
+          .map(function (p) {
+            return (
+              '<article class="item" data-id="' +
+              esc(p.id) +
+              '">' +
+              '<img src="' +
+              esc(p.imagem) +
+              '" alt="' +
+              esc(p.nome) +
+              '" loading="lazy" />' +
+              "<div><b>" +
+              esc(p.nome) +
+              "</b><span>" +
+              kz(p.preco) +
+              "</span></div></article>"
+            );
+          })
+          .join("");
+      }
+    } catch (erro) {
+      console.error("Erro ao carregar novidades:", erro);
+      novidades.innerHTML =
+        '<div class="vazio">Não foi possível carregar os produtos.</div>';
+    }
   }
+
+  carregarNovidades();
 
   /* clicar num produto abre o modal na página de produtos */
   novidades.addEventListener("click", function (e) {
