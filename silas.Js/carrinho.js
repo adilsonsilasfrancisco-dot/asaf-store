@@ -385,11 +385,19 @@ function configurarEventos() {
 /*==========================================================
         LOJA.HTML — ABRIR MODAL DO PRODUTO
    Usado pela Nova Coleção, Produtos em Destaque e Promoções.
-   Guarda o id e abre o modal na página de produtos.
+   Guarda o id, imagem e abre o modal na página de produtos.
 ==========================================================*/
-function irParaProduto(id) {
-  localStorage.setItem("produto_destaque", id);
-  window.location.href = "/silas.html/produtos.html";
+function irParaProduto(id, imagem = null) {
+  const produtoDestaque = imagem
+    ? {
+        id: Number(id),
+        imagem: imagem,
+      }
+    : id;
+
+  localStorage.setItem("produto_destaque", JSON.stringify(produtoDestaque));
+
+  window.location.href = "/silas.html/Produtos.html";
 }
 
 /*==========================================================
@@ -398,9 +406,9 @@ function irParaProduto(id) {
 ==========================================================*/
 function comprarProduto(id) {
   if (typeof Auth !== "undefined" && !Auth.logado()) {
-  Auth.pedirLogin("/silas.html/inicio.html");
-  return;
-}
+    Auth.pedirLogin("/silas.html/inicio.html");
+    return;
+  }
   const lista = JSON.parse(localStorage.getItem("produtos") || "[]");
   const produto = lista.find((p) => Number(p.id) === Number(id));
 

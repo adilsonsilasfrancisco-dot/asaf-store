@@ -1,125 +1,265 @@
 /** @format */
 /*=========================================================
-                ASAF ADMIN
-                produtos.js
+                    ASAF ADMIN
+                  GESTÃO DE PRODUTOS
 =========================================================*/
+
+"use strict";
 
 /*=========================================================
 LOGIN
 =========================================================*/
 
-if (localStorage.getItem("adminLogado") != "true") {
+if (localStorage.getItem("adminLogado") !== "true") {
   window.location.href = "login-admin.html";
 }
 
 /*=========================================================
-LOCAL STORAGE
+DADOS
 =========================================================*/
 
-let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+let produtos = [];
+let imagemBase64 = "";
+let editando = null;
+
+const CHAVE_PRODUTOS = "produtos";
+const CHAVE_INICIALIZACAO = "produtos_inicializados";
 
 /*=========================================================
-ELEMENTOS
+ELEMENTOS HTML
 =========================================================*/
 
 const modal = document.getElementById("modalProduto");
-
 const btnNovo = document.getElementById("btnNovo");
-
 const fechar = document.getElementById("fecharModal");
-
 const form = document.getElementById("produtoForm");
-
 const lista = document.getElementById("listaProdutos");
-
 const preview = document.getElementById("previewImagem");
-
 const imagem = document.getElementById("imagem");
-
-let imagemBase64 = "";
-
-let editando = null;
-
-/*=========================================================
-ABRIR MODAL
-=========================================================*/
-
-btnNovo.onclick = function () {
-  editando = null;
-
-  form.reset();
-
-  preview.style.display = "none";
-
-  preview.src = "";
-
-  imagemBase64 = "";
-
-  document.querySelector(".modal-header h2").innerHTML = "Novo Produto";
-
-  modal.classList.add("active");
-};
+const campoPesquisa = document.getElementById("searchInput");
+const filtroCategoria = document.getElementById("categoryFilter");
+const destaqueInicio = document.getElementById("destaqueInicio");
+const ordemInicio = document.getElementById("ordemInicio");
 
 /*=========================================================
-FECHAR MODAL
+NOTIFICAÇÕES
 =========================================================*/
 
-fechar.onclick = function () {
-  modal.classList.remove("active");
-};
+function toast(mensagem) {
+  const antigo = document.querySelector(".toast");
 
-window.onclick = function (e) {
-  if (e.target === modal) {
-    modal.classList.remove("active");
+  if (antigo) antigo.remove();
+
+  const div = document.createElement("div");
+  div.className = "toast";
+  div.textContent = mensagem;
+
+  document.body.appendChild(div);
+
+  setTimeout(() => div.classList.add("show"), 100);
+
+  setTimeout(() => {
+    div.classList.remove("show");
+
+    setTimeout(() => div.remove(), 400);
+  }, 3000);
+}
+
+/*=========================================================
+GUARDAR PRODUTOS COM SEGURANÇA
+=========================================================*/
+
+function salvarLista(novaLista) {
+  try {
+    localStorage.setItem(CHAVE_PRODUTOS, JSON.stringify(novaLista));
+
+    localStorage.setItem(CHAVE_INICIALIZACAO, "true");
+
+    produtos = novaLista;
+
+    atualizarDashboard();
+
+    return true;
+  } catch (erro) {
+    console.error("Erro ao guardar produtos:", erro);
+
+    toast(
+      "Não foi possível guardar. Verifica o espaço disponível no navegador.",
+    );
+
+    return false;
   }
-};
+}
 
 /*=========================================================
-UPLOAD DA IMAGEM
+NORMALIZAR DESTAQUES DOS PRODUTOS
 =========================================================*/
 
-imagem.addEventListener("change", function () {
-  const arquivo = this.files[0];
+function normalizarDestaques(lista) {
+  if (!Array.isArray(lista)) return [];
 
-  if (!arquivo) return;
+  // Encontrar a maior posição já utilizada
+  let maiorOrdem = 0;
 
-  const reader = new FileReader();
+  lista.forEach((produto) => {
+    const ordem = Number(produto.ordemDestaque);
 
-  reader.onload = function (e) {
-    imagemBase64 = e.target.result;
+    if (
+      produto.destaque === true &&
+      Number.isInteger(ordem) &&
+      ordem > maiorOrdem
+    ) {
+      maiorOrdem = ordem;
+    }
+  });
 
-    preview.src = imagemBase64;
+  let proximaOrdem = maiorOrdem + 1;
 
-    preview.style.display = "block";
-  };
+  return lista.map((produto) => {
+    const atualizado = { ...produto };
 
-  reader.readAsDataURL(arquivo);
-});
+    // Produtos antigos sem configuração continuam destacados
+    if (typeof atualizado.destaque !== "boolean") {
+      atualizado.destaque = true;
+    }
+
+    if (atualizado.destaque === true) {
+      const ordem = Number(atualizado.ordemDestaque);
+
+      if (!Number.isInteger(ordem) || ordem < 1) {
+        atualizado.ordemDestaque = proximaOrdem++;
+      }
+    } else {
+      atualizado.ordemDestaque = null;
+    }
+
+    return atualizado;
+  });
+}
 
 /*=========================================================
-CRIAR ID
+CARREGAR PRODUTOS DO JSON E DO LOCAL STORAGE
+=========================================================*/
+
+async function carregarProdutos() {
+  const dadosGuardados = localStorage.getItem(CHAVE_PRODUTOS);
+  const inicializado = localStorage.getItem(CHAVE_INICIALIZACAO) === "true";
+
+  let produtosLocais = null;
+
+  if (dadosGuardados !== null) {
+    try {
+      produtosLocais = JSON.parse(dadosGuardados);
+
+      if (!Array.isArray(produtosLocais)) {
+        produtosLocais = null;
+      }
+    } catch (erro) {
+      console.warn("Dados locais inválidos:", erro);
+      produtosLocais = null;
+    }
+  }
+
+  /*
+    Se o painel já foi inicializado, respeita a lista
+    guardada, incluindo eliminações feitas pelo administrador.
+  */
+
+  if (inicializado && Array.isArray(produtosLocais)) {
+    produtos = normalizarDestaques(produtosLocais);
+
+    salvarLista(produtos);
+
+    console.log("Produtos carregados do localStorage:", produtos.length);
+
+    return;
+  }
+
+  /*
+    Primeira inicialização:
+    carregar os produtos originais do JSON.
+  */
+
+  try {
+    const caminhoJSON = new URL("../produtos.json", document.baseURI);
+
+    const resposta = await fetch(caminhoJSON, {
+      cache: "no-store",
+    });
+
+    if (!resposta.ok) {
+      throw new Error(
+        "Não foi possível carregar produtos.json: " + resposta.status,
+      );
+    }
+
+    const produtosJSON = await resposta.json();
+
+    if (!Array.isArray(produtosJSON)) {
+      throw new Error("O ficheiro produtos.json não contém uma lista válida.");
+    }
+
+    /*
+      Se houver dados locais antigos sem marca de inicialização,
+      combina-os com o JSON, sem descartar os restantes produtos.
+      Os dados locais prevalecem quando o ID é igual.
+    */
+
+    if (Array.isArray(produtosLocais) && produtosLocais.length > 0) {
+      const mapa = new Map();
+
+      produtosJSON.forEach((produto) => {
+        mapa.set(String(produto.id), produto);
+      });
+
+      produtosLocais.forEach((produto) => {
+        mapa.set(String(produto.id), produto);
+      });
+
+      produtos = Array.from(mapa.values());
+    } else {
+      produtos = produtosJSON;
+    }
+
+    produtos = normalizarDestaques(produtos);
+
+    salvarLista(produtos);
+
+    console.log("Produtos carregados do produtos.json:", produtos.length);
+  } catch (erro) {
+    console.error("Erro ao carregar produtos:", erro);
+
+    /*
+      Se houver dados locais válidos, não os perde
+      quando o ficheiro JSON não estiver disponível.
+    */
+
+    if (Array.isArray(produtosLocais)) {
+      produtos = produtosLocais;
+    } else {
+      produtos = [];
+    }
+
+    toast("Não foi possível carregar o ficheiro de produtos.");
+  }
+}
+
+/*=========================================================
+CRIAR ID ÚNICO
 =========================================================*/
 
 function novoID() {
-  if (produtos.length == 0) return 1;
+  if (produtos.length === 0) return 1;
 
-  return Math.max(...produtos.map((p) => p.id)) + 1;
-}
-
-/*=========================================================
-SALVAR LOCAL STORAGE
-=========================================================*/
-
-function salvar() {
-  localStorage.setItem(
-    "produtos",
-
-    JSON.stringify(produtos),
+  const maiorID = Math.max(
+    ...produtos.map((produto) => Number(produto.id) || 0),
   );
+
+  return maiorID + 1;
 }
 
 /*=========================================================
-FORMATA PREÇO
+FORMATAÇÃO DE PREÇO
 =========================================================*/
 
 function dinheiro(valor) {
@@ -131,27 +271,80 @@ ESTADO DO STOCK
 =========================================================*/
 
 function estadoProduto(stock) {
-  if (stock > 0) {
-    return "Disponível";
-  }
-
-  return "Esgotado";
+  return Number(stock) > 0 ? "Disponível" : "Esgotado";
 }
-
-/*=========================================================
-COR DO BADGE
-=========================================================*/
 
 function classeEstado(stock) {
-  if (stock > 0) {
-    return "disponivel";
+  return Number(stock) > 0 ? "disponivel" : "esgotado";
+}
+
+/*=========================================================
+ABRIR MODAL - NOVO PRODUTO
+=========================================================*/
+
+function abrirNovoProduto() {
+  editando = null;
+  imagemBase64 = "";
+
+  form.reset();
+  destaqueInicio.value = "nao";
+  ordemInicio.value = "1";
+
+  imagem.value = "";
+  preview.src = "";
+  preview.style.display = "none";
+
+  document.querySelector(".modal-header h2").textContent = "Novo Produto";
+
+  modal.classList.add("active");
+}
+
+btnNovo.addEventListener("click", abrirNovoProduto);
+
+/*=========================================================
+FECHAR MODAL
+=========================================================*/
+
+fechar.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+window.addEventListener("click", (evento) => {
+  if (evento.target === modal) {
+    modal.classList.remove("active");
+  }
+});
+
+/*=========================================================
+UPLOAD E PRÉ-VISUALIZAÇÃO DA IMAGEM
+=========================================================*/
+
+imagem.addEventListener("change", function () {
+  const arquivo = this.files[0];
+
+  if (!arquivo) return;
+
+  if (!arquivo.type.startsWith("image/")) {
+    toast("Seleciona um ficheiro de imagem válido.");
+    this.value = "";
+    return;
   }
 
-  return "esgotado";
-}
-/*=========================================================
-                CRUD - PARTE 2
-=========================================================*/
+  const reader = new FileReader();
+
+  reader.onload = function (evento) {
+    imagemBase64 = evento.target.result;
+
+    preview.src = imagemBase64;
+    preview.style.display = "block";
+  };
+
+  reader.onerror = function () {
+    toast("Erro ao carregar a imagem.");
+  };
+
+  reader.readAsDataURL(arquivo);
+});
 
 /*=========================================================
 RENDERIZAR TABELA
@@ -161,132 +354,184 @@ function renderizarProdutos() {
   lista.innerHTML = "";
 
   if (produtos.length === 0) {
-    lista.innerHTML = `
+    const linha = document.createElement("tr");
+    const coluna = document.createElement("td");
 
-<tr>
+    coluna.colSpan = 7;
+    coluna.textContent = "Nenhum produto cadastrado.";
+    coluna.style.textAlign = "center";
+    coluna.style.padding = "30px";
 
-<td colspan="7" style="text-align:center;padding:30px;">
-
-Nenhum produto cadastrado.
-
-</td>
-
-</tr>
-
-`;
+    linha.appendChild(coluna);
+    lista.appendChild(linha);
 
     return;
   }
 
   produtos.forEach((produto) => {
-    lista.innerHTML += `
+    const linha = document.createElement("tr");
 
-<tr>
+    // Imagem
+    const colunaImagem = document.createElement("td");
+    const img = document.createElement("img");
 
-<td>
+    img.src = produto.imagem || "";
+    img.alt = produto.nome || "Produto";
+    img.className = "produto-img";
 
-<img
+    colunaImagem.appendChild(img);
 
-src="${produto.imagem || ""}"
+    // Nome
+    const colunaNome = document.createElement("td");
+    colunaNome.textContent = produto.nome || "";
 
-class="produto-img"
+    // Categoria
+    const colunaCategoria = document.createElement("td");
+    colunaCategoria.textContent = produto.categoria || "";
 
->
+    // Preço
+    const colunaPreco = document.createElement("td");
+    colunaPreco.textContent = dinheiro(produto.preco);
 
-</td>
+    // Stock
+    const colunaStock = document.createElement("td");
+    colunaStock.textContent = produto.stock ?? 0;
 
-<td>${produto.nome}</td>
+    // Estado
+    const colunaEstado = document.createElement("td");
+    const badge = document.createElement("span");
 
-<td>${produto.categoria}</td>
+    badge.className = "badge " + classeEstado(produto.stock);
 
-<td>${dinheiro(produto.preco)}</td>
+    badge.textContent = estadoProduto(produto.stock);
 
-<td>${produto.stock}</td>
+    colunaEstado.appendChild(badge);
 
-<td>
+    // Ações
+    const colunaAcoes = document.createElement("td");
+    const acoes = document.createElement("div");
 
-<span class="badge ${classeEstado(produto.stock)}">
+    acoes.className = "acoes";
 
-${estadoProduto(produto.stock)}
+    const btnEditar = document.createElement("button");
+    btnEditar.className = "btnEditar";
+    btnEditar.innerHTML = '<i class="fas fa-pen"></i>';
+    btnEditar.type = "button";
 
-</span>
+    btnEditar.addEventListener("click", () => {
+      editarProduto(produto.id);
+    });
 
-</td>
+    const btnExcluir = document.createElement("button");
+    btnExcluir.className = "btnExcluir";
+    btnExcluir.innerHTML = '<i class="fas fa-trash"></i>';
+    btnExcluir.type = "button";
 
-<td>
+    btnExcluir.addEventListener("click", () => {
+      eliminarProduto(produto.id);
+    });
 
-<div class="acoes">
+    acoes.appendChild(btnEditar);
+    acoes.appendChild(btnExcluir);
+    colunaAcoes.appendChild(acoes);
 
-<button
+    linha.append(
+      colunaImagem,
+      colunaNome,
+      colunaCategoria,
+      colunaPreco,
+      colunaStock,
+      colunaEstado,
+      colunaAcoes,
+    );
 
-class="btnEditar"
-
-onclick="editarProduto(${produto.id})">
-
-<i class="fas fa-pen"></i>
-
-</button>
-
-<button
-
-class="btnExcluir"
-
-onclick="eliminarProduto(${produto.id})">
-
-<i class="fas fa-trash"></i>
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
+    lista.appendChild(linha);
   });
+
+  filtrarProdutos();
 }
 
 /*=========================================================
-GUARDAR PRODUTO
+ADICIONAR E EDITAR PRODUTO
 =========================================================*/
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+form.addEventListener("submit", function (evento) {
+  evento.preventDefault();
 
-  const produto = {
-    id: editando || novoID(),
+  const nome = document.getElementById("nome").value.trim();
+  const categoria = document.getElementById("categoria").value;
+  const preco = Number(document.getElementById("preco").value);
+  const stock = Number(document.getElementById("stock").value);
+  const descricao = document.getElementById("descricao").value.trim();
+  const mostrarInicio = destaqueInicio.value === "sim";
+  const posicaoInicio = Number(ordemInicio.value);
 
-    nome: document.getElementById("nome").value,
-
-    categoria: document.getElementById("categoria").value,
-
-    preco: Number(document.getElementById("preco").value),
-
-    stock: Number(document.getElementById("stock").value),
-
-    descricao: document.getElementById("descricao").value,
-
-    imagem: imagemBase64,
-  };
-
-  if (editando) {
-    const indice = produtos.findIndex((p) => p.id === editando);
-
-    if (produto.imagem === "") {
-      produto.imagem = produtos[indice].imagem;
-    }
-
-    produtos[indice] = produto;
-
-    toast("Produto atualizado com sucesso.");
-  } else {
-    produtos.push(produto);
-
-    toast("Produto adicionado com sucesso.");
+  if (
+    mostrarInicio &&
+    (!Number.isInteger(posicaoInicio) || posicaoInicio < 1)
+  ) {
+    toast("Indica uma posição válida para a página inicial.");
+    return;
   }
 
-  salvar();
+  if (
+    !nome ||
+    !categoria ||
+    !Number.isFinite(preco) ||
+    !Number.isFinite(stock)
+  ) {
+    toast("Preenche corretamente os campos do produto.");
+    return;
+  }
+
+  let novaLista = [...produtos];
+  const estavaEditando = editando !== null;
+
+  if (editando !== null) {
+    const indice = novaLista.findIndex(
+      (produto) => String(produto.id) === String(editando),
+    );
+
+    if (indice === -1) {
+      toast("Produto não encontrado.");
+      return;
+    }
+
+    const imagemAnterior = novaLista[indice].imagem || "";
+
+    const produtoAtualizado = {
+      ...novaLista[indice],
+      nome,
+      categoria,
+      preco,
+      stock,
+      descricao,
+      imagem: imagemBase64 || imagemAnterior,
+      destaque: mostrarInicio,
+      ordemDestaque: mostrarInicio ? posicaoInicio : null,
+    };
+
+    novaLista[indice] = produtoAtualizado;
+  } else {
+    const novoProduto = {
+      id: novoID(),
+      nome,
+      categoria,
+      preco,
+      stock,
+      descricao,
+      imagem: imagemBase64,
+      destaque: mostrarInicio,
+      ordemDestaque: mostrarInicio ? posicaoInicio : null,
+    };
+
+    // Acrescenta ao array existente, sem o substituir.
+    novaLista.push(novoProduto);
+  }
+
+  if (!salvarLista(novaLista)) {
+    return;
+  }
 
   renderizarProdutos();
 
@@ -294,49 +539,61 @@ form.addEventListener("submit", function (e) {
 
   form.reset();
 
+  imagem.value = "";
   preview.src = "";
-
   preview.style.display = "none";
 
   imagemBase64 = "";
-
   editando = null;
+
+  toast(
+    estavaEditando
+      ? "Produto atualizado com sucesso."
+      : "Produto adicionado com sucesso.",
+  );
 });
 
 /*=========================================================
-EDITAR
+EDITAR PRODUTO
 =========================================================*/
 
 function editarProduto(id) {
-  const produto = produtos.find((p) => p.id === id);
+  const produto = produtos.find((item) => String(item.id) === String(id));
 
-  if (!produto) return;
+  if (!produto) {
+    toast("Produto não encontrado.");
+    return;
+  }
 
-  editando = id;
+  editando = produto.id;
 
-  document.querySelector(".modal-header h2").innerHTML = "Editar Produto";
+  document.querySelector(".modal-header h2").textContent = "Editar Produto";
 
-  document.getElementById("nome").value = produto.nome;
+  document.getElementById("nome").value = produto.nome || "";
+  document.getElementById("categoria").value = produto.categoria || "";
+  document.getElementById("preco").value = produto.preco ?? "";
+  document.getElementById("stock").value = produto.stock ?? 0;
+  document.getElementById("descricao").value = produto.descricao || "";
+  destaqueInicio.value = produto.destaque === true ? "sim" : "nao";
 
-  document.getElementById("categoria").value = produto.categoria;
+  ordemInicio.value = produto.ordemDestaque || "1";
 
-  document.getElementById("preco").value = produto.preco;
+  imagemBase64 = produto.imagem || "";
+  imagem.value = "";
 
-  document.getElementById("stock").value = produto.stock;
-
-  document.getElementById("descricao").value = produto.descricao;
-
-  imagemBase64 = produto.imagem;
-
-  preview.src = produto.imagem;
-
-  preview.style.display = "block";
+  if (imagemBase64) {
+    preview.src = imagemBase64;
+    preview.style.display = "block";
+  } else {
+    preview.src = "";
+    preview.style.display = "none";
+  }
 
   modal.classList.add("active");
 }
 
 /*=========================================================
-ELIMINAR
+ELIMINAR PRODUTO
 =========================================================*/
 
 function eliminarProduto(id) {
@@ -344,267 +601,170 @@ function eliminarProduto(id) {
 
   if (!confirmar) return;
 
-  produtos = produtos.filter((p) => p.id !== id);
+  const novaLista = produtos.filter(
+    (produto) => String(produto.id) !== String(id),
+  );
 
-  salvar();
+  if (!salvarLista(novaLista)) {
+    return;
+  }
 
   renderizarProdutos();
 
-  toast("Produto eliminado.");
+  toast("Produto eliminado com sucesso.");
 }
-
 
 /*=========================================================
-                CRUD - PARTE 3
+PESQUISA E FILTROS
 =========================================================*/
 
+function filtrarProdutos() {
+  if (!campoPesquisa || !filtroCategoria) return;
 
-/*=========================================================
-PESQUISA
-=========================================================*/
+  const texto = campoPesquisa.value.toLowerCase().trim();
+  const categoria = filtroCategoria.value;
 
-const campoPesquisa=document.getElementById("searchInput");
+  const linhas = lista.querySelectorAll("tr");
 
-campoPesquisa.addEventListener("keyup",filtrarProdutos);
+  linhas.forEach((linha) => {
+    const colunas = linha.querySelectorAll("td");
 
-document.getElementById("categoryFilter").addEventListener("change",filtrarProdutos);
+    if (colunas.length < 7) return;
 
+    const nome = colunas[1].textContent.toLowerCase();
+    const cat = colunas[2].textContent;
 
-function filtrarProdutos(){
+    const pesquisaOK = nome.includes(texto);
+    const categoriaOK = categoria === "" || cat === categoria;
 
-const texto=campoPesquisa.value.toLowerCase();
-
-const categoria=document.getElementById("categoryFilter").value;
-
-const linhas=lista.querySelectorAll("tr");
-
-linhas.forEach(linha=>{
-
-const colunas=linha.querySelectorAll("td");
-
-if(colunas.length===0)return;
-
-const nome=colunas[1].innerText.toLowerCase();
-
-const cat=colunas[2].innerText;
-
-const pesquisaOK=nome.includes(texto);
-
-const categoriaOK=
-
-categoria==="" ||
-
-cat===categoria;
-
-linha.style.display=
-
-pesquisaOK && categoriaOK
-
-?
-
-""
-
-:
-
-"none";
-
-});
-
+    linha.style.display = pesquisaOK && categoriaOK ? "" : "none";
+  });
 }
 
-
-/*=========================================================
-TOAST
-=========================================================*/
-
-function toast(mensagem){
-
-const antigo=document.querySelector(".toast");
-
-if(antigo){
-
-antigo.remove();
-
-}
-
-const div=document.createElement("div");
-
-div.className="toast";
-
-div.innerHTML=mensagem;
-
-document.body.appendChild(div);
-
-setTimeout(()=>{
-
-div.classList.add("show");
-
-},100);
-
-setTimeout(()=>{
-
-div.classList.remove("show");
-
-setTimeout(()=>{
-
-div.remove();
-
-},400);
-
-},3000);
-
-}
-
+campoPesquisa.addEventListener("input", filtrarProdutos);
+filtroCategoria.addEventListener("change", filtrarProdutos);
 
 /*=========================================================
 ATUALIZAR DASHBOARD
 =========================================================*/
 
-function atualizarDashboard(){
-
-localStorage.setItem(
-
-"totalProdutos",
-
-produtos.length
-
-);
-
+function atualizarDashboard() {
+  try {
+    localStorage.setItem("totalProdutos", produtos.length);
+  } catch (erro) {
+    console.warn("Não foi possível atualizar o dashboard:", erro);
+  }
 }
-
 
 /*=========================================================
-LOGOUT
+ORDENAR PRODUTOS
 =========================================================*/
 
-function logout(){
-
-if(confirm("Deseja sair do painel administrativo?")){
-
-localStorage.removeItem("adminLogado");
-
-window.location.href="login-admin.html";
-
+function ordenarProdutos() {
+  produtos.sort((a, b) =>
+    String(a.nome || "").localeCompare(String(b.nome || ""), "pt"),
+  );
 }
-
-}
-
-
-/*=========================================================
-ORDENAR POR NOME
-=========================================================*/
-
-function ordenarProdutos(){
-
-produtos.sort((a,b)=>
-
-a.nome.localeCompare(b.nome)
-
-);
-
-}
-
 
 /*=========================================================
 VERIFICAR STOCK
 =========================================================*/
 
-function verificarStock(){
-
-produtos.forEach(produto=>{
-
-if(produto.stock<5){
-
-console.log(
-
-"Stock baixo:",
-
-produto.nome
-
-);
-
+function verificarStock() {
+  produtos.forEach((produto) => {
+    if (Number(produto.stock) < 5) {
+      console.log("Stock baixo:", produto.nome);
+    }
+  });
 }
-
-});
-
-}
-
 
 /*=========================================================
 ESTATÍSTICAS
 =========================================================*/
 
-function estatisticas(){
+function estatisticas() {
+  const total = produtos.length;
 
-const total=produtos.length;
+  const disponiveis = produtos.filter(
+    (produto) => Number(produto.stock) > 0,
+  ).length;
 
-const disponiveis=
+  const esgotados = produtos.filter(
+    (produto) => Number(produto.stock) === 0,
+  ).length;
 
-produtos.filter(
-
-p=>p.stock>0
-
-).length;
-
-const esgotados=
-
-produtos.filter(
-
-p=>p.stock==0
-
-).length;
-
-console.log("Produtos:",total);
-
-console.log("Disponíveis:",disponiveis);
-
-console.log("Esgotados:",esgotados);
-
+  console.log("Produtos:", total);
+  console.log("Disponíveis:", disponiveis);
+  console.log("Esgotados:", esgotados);
 }
-
 
 /*=========================================================
 EXPORTAR PRODUTOS
 =========================================================*/
 
-function exportarProdutos(){
+function exportarProdutos() {
+  const dados = JSON.stringify(produtos, null, 4);
 
-const dados=
+  const ficheiro = new Blob([dados], { type: "application/json" });
 
-JSON.stringify(produtos,null,4);
+  const url = URL.createObjectURL(ficheiro);
+  const link = document.createElement("a");
 
-console.log(dados);
+  link.href = url;
+  link.download = "produtos.json";
 
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
 }
-
 
 /*=========================================================
 IMPORTAR PRODUTOS
 =========================================================*/
 
-function importarProdutos(listaNova){
+function importarProdutos(listaNova) {
+  if (!Array.isArray(listaNova)) {
+    toast("A lista importada não é válida.");
+    return;
+  }
 
-produtos=listaNova;
+  listaNova = normalizarDestaques(listaNova);
 
-salvar();
+  if (!salvarLista(listaNova)) return;
+  ordenarProdutos();
+  renderizarProdutos();
 
-renderizarProdutos();
-
+  toast("Produtos importados com sucesso.");
 }
 
+/*=========================================================
+LOGOUT
+=========================================================*/
+
+function logout() {
+  if (confirm("Deseja sair do painel administrativo?")) {
+    localStorage.removeItem("adminLogado");
+    window.location.href = "login-admin.html";
+  }
+}
 
 /*=========================================================
 INICIALIZAÇÃO
 =========================================================*/
 
-ordenarProdutos();
+async function inicializarPainel() {
+  await carregarProdutos();
 
-renderizarProdutos();
+  ordenarProdutos();
+  renderizarProdutos();
+  verificarStock();
+  estatisticas();
+  atualizarDashboard();
 
-verificarStock();
+  console.log("CRUD Produtos iniciado.");
+  console.log("Total de produtos:", produtos.length);
+}
 
-estatisticas();
-
-atualizarDashboard();
-
-console.log("CRUD Produtos iniciado.");
+inicializarPainel();

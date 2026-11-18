@@ -160,12 +160,12 @@
 
       d.className = "slide" + (i ? "" : " ativo");
 
-      var imagem = /^data:image\//i.test(sl.img)
+      var imagemSlide = /^data:image\//i.test(sl.img)
         ? sl.img
         : caminhoImagem(sl.img);
 
       d.style.backgroundImage =
-        'url("' + String(imagem).replace(/"/g, "%22") + '")';
+        'url("' + String(imagemSlide).replace(/"/g, "%22") + '")';
 
       d.innerHTML =
         '<div class="slide-texto">' +
@@ -318,6 +318,42 @@
 
   var MAX_DESKTOP = 15;
 
+  /*=========================================================
+     SELECIONAR E ORDENAR DESTAQUES DA PÁGINA INICIAL
+  =========================================================*/
+
+  function selecionarDestaques(lista) {
+    if (!Array.isArray(lista)) return [];
+
+    return lista
+      .map(function (produto, indice) {
+        return {
+          produto: produto,
+          indice: indice,
+        };
+      })
+      .filter(function (item) {
+        return item.produto && item.produto.destaque === true;
+      })
+      .sort(function (a, b) {
+        var ordemA = Number(a.produto.ordemDestaque);
+        var ordemB = Number(b.produto.ordemDestaque);
+
+        if (!Number.isFinite(ordemA) || ordemA < 1) {
+          ordemA = Infinity;
+        }
+
+        if (!Number.isFinite(ordemB) || ordemB < 1) {
+          ordemB = Infinity;
+        }
+
+        return ordemA - ordemB || a.indice - b.indice;
+      })
+      .map(function (item) {
+        return item.produto;
+      });
+  }
+
   function cartao(p) {
     var est = Number(p.stock || 0);
     var esg = est <= 0;
@@ -377,7 +413,7 @@
   function desenhar() {
     if (!produtos.length) {
       grid.innerHTML =
-        '<div class="vazio">Ainda não há produtos na loja.</div>';
+        '<div class="vazio">Ainda não há produtos selecionados para a página inicial.</div>';
       return;
     }
 
@@ -690,15 +726,20 @@
     if (card) abrirModal(card.dataset.id);
   });
 
-  /* CARREGAMENTO DOS PRODUTOS */
+  /*=========================================================
+     CARREGAMENTO DOS PRODUTOS
+  =========================================================*/
+
   async function carregarProdutos() {
     var locais = ler("produtos");
     var publicado = location.hostname.endsWith("github.io");
 
     if (!publicado && locais.length) {
-      produtos = locais.slice().reverse();
+      produtos = selecionarDestaques(locais);
+
       prepararCategorias();
       contador();
+
       return;
     }
 
@@ -714,7 +755,7 @@
 
       var dados = await resposta.json();
 
-      produtos = Array.isArray(dados) ? dados.slice().reverse() : [];
+      produtos = selecionarDestaques(dados);
 
       prepararCategorias();
     } catch (erro) {

@@ -137,20 +137,35 @@
 
       $("resProdutos").textContent = produtos.length;
 
-      if (!produtos.length) {
+      var ordemNovidades = [12, 10, 11, 15];
+
+      var imagensNovidades = {
+        12: new URL("../img/novidade-vestido.jpg", document.baseURI).href,
+        10: new URL("../img/novidade-tenis.jpg", document.baseURI).href,
+        11: new URL("../img/novidade-tshirt.jpg", document.baseURI).href,
+        15: new URL("../img/novidade-acessorios.jpg", document.baseURI).href,
+      };
+
+      var produtosNovidades = ordemNovidades
+        .map(function (id) {
+          return produtos.find(function (p) {
+            return Number(p.id) === id;
+          });
+        })
+        .filter(Boolean);
+
+      if (!produtosNovidades.length) {
         novidades.innerHTML =
-          '<div class="vazio">Ainda não há produtos na loja.</div>';
+          '<div class="vazio">Ainda não há novidades disponíveis.</div>';
       } else {
-        novidades.innerHTML = produtos
-          .slice(-4)
-          .reverse()
+        novidades.innerHTML = produtosNovidades
           .map(function (p) {
             return (
               '<article class="item" data-id="' +
               esc(p.id) +
               '">' +
               '<img src="' +
-              esc(p.imagem) +
+              esc(imagensNovidades[p.id] || p.imagem) +
               '" alt="' +
               esc(p.nome) +
               '" loading="lazy" />' +
@@ -178,10 +193,16 @@
 
     if (!card) return;
 
+    var imagem = card.querySelector("img");
+
     localStorage.setItem(
       "produto_destaque",
-      JSON.stringify({ id: Number(card.dataset.id), imagem: "" }),
+      JSON.stringify({
+        id: Number(card.dataset.id),
+        imagem: imagem ? imagem.getAttribute("src") : "",
+      }),
     );
+
     location.href = LOJA_PRODUTOS;
   });
 

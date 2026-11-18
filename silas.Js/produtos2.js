@@ -169,16 +169,10 @@ function criarCard(produto) {
       </div>
 
 
-      <!-- IMAGEM -->
+          <!-- IMAGEM -->
 
       <div class="produto-imagem">
-
-        <img
-          src="${produto.imagem || ""}"
-          alt="${produto.nome || "Produto"}"
-          loading="lazy"
-        />
-
+       <img src="${produto.imagem || ""}" alt="${produto.nome}" />
       </div>
 
 
@@ -526,7 +520,7 @@ function mostrarMensagem(texto) {
    (usado pelos cards da página e pela Nova Coleção)
 ========================================================== */
 
-function abrirModalProduto(id) {
+function abrirModalProduto(id, imagemDestaque) {
   const produto = produtos.find((p) => Number(p.id) === Number(id));
 
   if (!produto) return;
@@ -551,7 +545,7 @@ function abrirModalProduto(id) {
       <button class="modal-fechar" onclick="fecharModal()">✕</button>
 
       <div class="modal-imagem">
-        <img src="${produto.imagem || ""}" alt="${produto.nome}" />
+        <img src="${imagemDestaque || produto.imagem || ""}" alt="${produto.nome}" />
       </div>
 
       <div class="modal-info">
@@ -650,12 +644,14 @@ async function iniciarProdutos() {
     localStorage.removeItem("produto_destaque");
 
     let idDestaque = produtoDestaque;
+    let imagemDestaque = "";
 
     try {
       const dadosDestaque = JSON.parse(produtoDestaque);
 
       if (dadosDestaque && typeof dadosDestaque === "object") {
         idDestaque = dadosDestaque.id;
+        imagemDestaque = dadosDestaque.imagem || "";
       } else {
         idDestaque = dadosDestaque;
       }
@@ -666,7 +662,10 @@ async function iniciarProdutos() {
     const existe = produtos.some((p) => Number(p.id) === Number(idDestaque));
 
     if (existe) {
-      setTimeout(() => abrirModalProduto(Number(idDestaque)), 600);
+      setTimeout(
+        () => abrirModalProduto(Number(idDestaque), imagemDestaque),
+        600,
+      );
     } else {
       console.warn("Produto selecionado não encontrado:", idDestaque);
     }

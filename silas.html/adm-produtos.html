@@ -105,9 +105,13 @@
           <option>Acessórios</option>
         </select>
 
+        <button type="button" onclick="exportarProdutos()" id="btnExportar">
+          <i class="fas fa-file-export"></i>
+          Exportar Produtos
+        </button>
+
         <button id="btnNovo">
           <i class="fas fa-plus"></i>
-
           Novo Produto
         </button>
       </div>
@@ -193,6 +197,29 @@
             <label>Descrição</label>
 
             <textarea id="descricao" rows="5"></textarea>
+          </div>
+
+          <!-- DESTAQUE NA PÁGINA INICIAL -->
+
+          <div class="campo">
+            <label>Mostrar na página inicial?</label>
+
+            <select id="destaqueInicio">
+              <option value="nao">Não mostrar</option>
+              <option value="sim">Mostrar na página inicial</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label>Posição na página inicial</label>
+
+            <input
+              type="number"
+              id="ordemInicio"
+              min="1"
+              step="1"
+              value="1"
+              placeholder="Ex.: 1, 2, 3..." />
           </div>
 
           <button type="submit" class="salvar">Guardar Produto</button>
