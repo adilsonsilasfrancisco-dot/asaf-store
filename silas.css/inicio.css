@@ -23,74 +23,10 @@ h2 {
   font-weight: 400;
 }
 
-/* ── TOPO ── */
-.topo {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 75px;
-  padding: 0 5%;
-  background: #111;
-}
+/* =====================================================
+   CARROSSEL
+===================================================== */
 
-.topo-logo img {
-  display: block;
-  width: 110px;
-}
-
-.topo-menu {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.topo-menu a,
-.topo-menu button {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.5px;
-  color: #fff;
-  background: none;
-  border: 0;
-  cursor: pointer;
-}
-
-.topo-menu a:hover,
-.topo-menu button:hover,
-.topo-menu a.ativo {
-  color: #bbb;
-}
-
-/* carrinho: texto no desktop, só ícone no mobile */
-.carrinho-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.carrinho-icone {
-  display: none;
-  font-size: 18px;
-}
-
-#contadorCarrinho {
-  display: inline-grid;
-  place-items: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-  border-radius: 10px;
-  background: #fff;
-  color: #111;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* ── CARROSSEL ── */
 .slider {
   position: relative;
   height: 72vh;
@@ -220,7 +156,10 @@ h2 {
   background: #fff;
 }
 
-/* ── FAIXA ── */
+/* =====================================================
+   FAIXA PROMOCIONAL
+===================================================== */
+
 .faixa {
   display: flex;
   flex-wrap: wrap;
@@ -280,7 +219,10 @@ h2 {
   background: #ddd;
 }
 
-/* ── DESTAQUES ── */
+/* =====================================================
+   DESTAQUES E FILTROS
+===================================================== */
+
 .bloco {
   padding: 56px 5% 0;
 }
@@ -333,7 +275,10 @@ h2 {
   gap: 20px;
 }
 
-/* ── CARDS ── */
+/* =====================================================
+   CARTÕES DOS PRODUTOS
+===================================================== */
+
 .item {
   display: flex;
   flex-direction: column;
@@ -379,7 +324,6 @@ h2 {
   font-size: 15px;
 }
 
-/* preço e stock SEMPRE na mesma linha */
 .item-rodape {
   display: flex;
   flex-direction: row;
@@ -406,47 +350,48 @@ h2 {
   color: #c0392b;
 }
 
-/* ── BOTÃO ADICIONAR AO CARRINHO (igual ao da página de produtos) ── */
+/* =====================================================
+   BOTÃO COMPRAR
+===================================================== */
+
 .btn-comprar {
-  width: 100%;
-  margin-top: 12px;
-  padding: 10px 12px;
-
-  border: none;
-  border-radius: 7px;
-
-  background-color: #000000;
-  color: #ffffff;
-
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-
-  cursor: pointer;
-
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 6px;
-
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 7px;
+  background-color: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
   transition:
     background-color 0.3s ease,
     transform 0.2s ease;
 }
 
 .btn-comprar:hover {
-  background-color: #222222;
-  color: #ffffff;
+  background-color: #222;
+  color: #fff;
   transform: translateY(-1px);
 }
 
 .btn-comprar:disabled {
-  background-color: #cccccc;
-  color: #777777;
+  background-color: #ccc;
+  color: #777;
   cursor: not-allowed;
   transform: none;
 }
+
+/* =====================================================
+   ESTADOS VAZIOS E NOTIFICAÇÕES
+===================================================== */
 
 .vazio {
   grid-column: 1 / -1;
@@ -455,55 +400,6 @@ h2 {
   border-radius: 14px;
   text-align: center;
   color: #666;
-}
-
-.footer {
-  background: #f5f5f5;
-  color: black;
-  margin-top: 50px;
-  min-height: 70vh;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 40px 8%;
-}
-
-.footer-box {
-  margin: 20px;
-}
-
-.footer-box h2 {
-  margin-bottom: 15px;
-}
-
-.footer-box a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  margin: 8px 0;
-}
-
-.footer-box a:hover {
-  color: gray;
-}
-
-.footer-copy {
-  text-align: center;
-  padding: 15px;
-  border-top: 1px solid #333;
-}
-
-footer {
-  background-color: #ffffff;
-  color: #0f0f0f;
-  text-align: center;
-  padding: 60px 0;
-  margin-top: 50px;
-  font-size: 18px;
-  height: 220px;
 }
 
 .toast {
@@ -528,38 +424,11 @@ footer {
   transform: none;
 }
 
-/* ── RESPONSIVO ── */
+/* =====================================================
+   RESPONSIVIDADE GERAL
+===================================================== */
+
 @media (max-width: 720px) {
-  .topo {
-    padding: 0 4%;
-  }
-
-  .topo-menu {
-    gap: 14px;
-  }
-
-  .topo-menu a,
-  .topo-menu button {
-    font-size: 16px;
-  }
-
-  .topo-logo img {
-    width: 90px;
-  }
-
-  /* carrinho: só o ícone (com o contador) */
-  .carrinho-texto {
-    display: none;
-  }
-
-  .carrinho-icone {
-    display: inline-block;
-  }
-
-  .carrinho-link {
-    gap: 5px;
-  }
-
   .slider {
     height: 62vh;
     min-height: 380px;
@@ -578,7 +447,6 @@ footer {
     gap: 12px;
   }
 
-  /* card igual ao da página de produtos */
   .item {
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -593,9 +461,8 @@ footer {
     height: 190px;
   }
 
-  /* menos espaço lateral = botão mais comprido */
   .item-info {
-    padding: 12px 10px 12px;
+    padding: 12px 10px;
   }
 
   .item-preco {
@@ -620,16 +487,12 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .topo-menu {
-    gap: 12px;
-  }
-
   .grelha {
     gap: 10px;
   }
 
   .item-info {
-    padding: 10px 8px 10px;
+    padding: 10px 8px;
   }
 
   .btn-comprar {
@@ -639,18 +502,12 @@ footer {
   }
 }
 
-/* telemóveis pequenos: "Início" esconde-se (o logotipo já leva ao início) */
 @media (max-width: 420px) {
   .menu-inicio {
     display: none;
   }
-
-  .topo-logo img {
-    width: 80px;
-  }
 }
 
-/* telemóveis estreitos: o texto do botão cabe inteiro sem o ícone */
 @media (max-width: 380px) {
   .btn-comprar i {
     display: none;
@@ -670,7 +527,268 @@ footer {
     font-size: 10px;
   }
 }
-/* ── MODAL DO PRODUTO ── */
+
+/* =====================================================
+   DESTAQUES NO MOBILE
+===================================================== */
+
+@media (max-width: 720px) {
+  .grelha {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .grelha .item {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 480px;
+    border-radius: 0;
+    box-shadow: none;
+    background: #111;
+    transform: none;
+  }
+
+  .grelha .item:hover {
+    transform: none;
+  }
+
+  .grelha .item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .grelha .item-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex: none;
+    padding: 120px 20px 36px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+    pointer-events: none;
+  }
+
+  .grelha .item-info b {
+    margin: 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+
+  .grelha .item-info small,
+  .grelha .item-rodape,
+  .grelha .btn-comprar {
+    display: none;
+  }
+
+  .grelha .vazio {
+    width: auto;
+    margin: 0 5%;
+  }
+
+  /* FILAS HORIZONTAIS */
+
+  .grelha .fila {
+    min-width: 0;
+    padding: 28px 0 24px;
+  }
+
+  .grelha .fila-titulo {
+    margin-bottom: 12px;
+    padding: 0 5%;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #111;
+  }
+
+  .grelha .fila-scroll {
+    display: flex;
+    gap: 4px;
+    padding: 0 5%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 5%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .grelha .fila-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grelha .fila .item {
+    flex: 0 0 64vw;
+    width: 64vw;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: start;
+  }
+
+  .grelha .fila .item-info {
+    padding: 70px 14px 16px;
+  }
+
+  .grelha .fila .item-info b {
+    font-size: 26px;
+  }
+}
+
+/* =====================================================
+   DESTAQUES NO DESKTOP
+===================================================== */
+
+@media (min-width: 721px) {
+  .bloco {
+    overflow-x: clip;
+  }
+
+  .grelha {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0 -5.5556%;
+  }
+
+  .grelha .item {
+    position: relative;
+    height: 100vh;
+    min-height: 560px;
+    border-radius: 0;
+    box-shadow: none;
+    background: #111;
+    transform: none;
+  }
+
+  .grelha > .item {
+    margin: 0 6%;
+  }
+
+  .grelha .item:hover {
+    transform: none;
+  }
+
+  .grelha .item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.6s ease;
+  }
+
+  .grelha .item:hover img {
+    transform: scale(1.03);
+  }
+
+  .grelha .item-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex: none;
+    padding: 160px 40px 48px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+    pointer-events: none;
+  }
+
+  .grelha .item-info b {
+    margin: 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+
+  .grelha .item-info small,
+  .grelha .item-rodape,
+  .grelha .btn-comprar {
+    display: none;
+  }
+
+  .grelha .vazio {
+    margin: 0 5.5556%;
+  }
+
+  .grelha .linha .item {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+  }
+
+  /* LINHA DE 3 PRODUTOS */
+
+  .grelha .linha-a {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 72px 12%;
+  }
+
+  .grelha .linha-a .item-info {
+    padding: 90px 20px 24px;
+  }
+
+  .grelha .linha-a .item-info b {
+    font-size: clamp(28px, 3vw, 48px);
+  }
+
+  /* LINHA HORIZONTAL */
+
+  .grelha .linha-b {
+    padding: 72px 0;
+  }
+
+  .grelha .linha-scroll {
+    display: flex;
+    gap: 16px;
+    padding: 0 8% 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #999 transparent;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .grelha .linha-scroll.arrastando {
+    cursor: grabbing;
+  }
+
+  .grelha .linha-b .item {
+    flex: 0 0 22vw;
+    width: 22vw;
+  }
+
+  .grelha .linha-b .item-info {
+    padding: 60px 14px 16px;
+  }
+
+  .grelha .linha-b .item-info b {
+    font-size: clamp(20px, 1.8vw, 30px);
+  }
+}
+
+/* =====================================================
+   MODAL DO PRODUTO
+===================================================== */
+
 .modal {
   position: fixed;
   inset: 0;
@@ -791,20 +909,23 @@ footer {
 .modal-info .btn-comprar {
   margin-top: auto;
   padding: 13px 16px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #fff;
+  color: #000;
 }
 
 .modal-info .btn-comprar:hover {
-  background-color: #dddddd;
+  background-color: #ddd;
 }
 
 .modal-info .btn-comprar:disabled {
-  background-color: #333333;
-  color: #777777;
+  background-color: #333;
+  color: #777;
 }
 
-/* ── MODAL NO MOBILE: imagem inteira, sem cortes ── */
+/* =====================================================
+   MODAL NO MOBILE
+===================================================== */
+
 @media (max-width: 600px) {
   .modal {
     padding: 10px;

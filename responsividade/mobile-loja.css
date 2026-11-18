@@ -1,5 +1,9 @@
 /** @format */
 
+/* =========================================================
+   TABLETS E ECRÃS ATÉ 1024px
+========================================================= */
+
 @media (max-width: 1024px) {
   .nav1 {
     padding: 16px 24px;
@@ -27,15 +31,18 @@
   .card3 {
     width: 200px;
   }
+
   .container {
     flex-wrap: nowrap;
     margin-top: 30px;
   }
+
   .card {
     width: 90%;
     height: 150px;
     gap: 16px;
   }
+
   .destaques h1 {
     font-size: 34px;
   }
@@ -46,8 +53,13 @@
   }
 }
 
+/* =========================================================
+   MOBILE E TABLETS PEQUENOS
+========================================================= */
+
 @media (max-width: 768px) {
-  /* NAV1 — logotipo, fixo, não sobe com o scroll */
+  /* NAV1 — LOGOTIPO FIXO */
+
   .nav1,
   .scrolled .nav1 {
     transform: none !important;
@@ -64,6 +76,7 @@
   }
 
   /* FAIXA DE LINKS */
+
   .menu {
     display: flex !important;
     position: fixed;
@@ -109,7 +122,8 @@
     font-size: 14px;
   }
 
-  /* HAMBÚRGUER branco */
+  /* HAMBÚRGUER */
+
   .hamburger {
     display: flex;
     z-index: 1200;
@@ -119,7 +133,8 @@
     background: #ffffff;
   }
 
-  /* NAV2 — barra escura sempre visível */
+  /* NAV2 */
+
   .nav2,
   .scrolled .nav2 {
     transform: none !important;
@@ -132,7 +147,8 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   }
 
-  /* MENU DE CATEGORIAS (abre por baixo da faixa) */
+  /* MENU DE CATEGORIAS */
+
   .nav2 ul {
     display: none;
     flex-direction: column;
@@ -155,7 +171,6 @@
     display: flex;
   }
 
-  /* ITENS */
   .nav2 ul li {
     width: 100%;
     height: auto;
@@ -175,7 +190,8 @@
     align-items: center;
   }
 
-  /* SETA DOS DROPDOWNS */
+  /* SETAS DOS DROPDOWNS */
+
   .nav2 ul li.dropdown > a::after {
     content: "▾";
     font-size: 13px;
@@ -187,7 +203,8 @@
     transform: rotate(180deg);
   }
 
-  /* DROPDOWN */
+  /* DROPDOWNS */
+
   .dropdown-content {
     display: none;
     position: static;
@@ -225,6 +242,8 @@
     background: #f0f0f0;
   }
 
+  /* CARDS DE PRODUTOS */
+
   .container {
     display: flex;
     flex-wrap: nowrap;
@@ -248,12 +267,11 @@
   .card {
     flex: 0 0 180px;
     height: 360px;
-    width: 200;
+    width: 200px;
     border-radius: 16px;
     overflow: hidden;
     scroll-snap-align: start;
     margin: 0;
-
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
@@ -267,6 +285,158 @@
 
   .promo {
     margin-top: 20px;
+  }
+
+  /* CARROSSEL DE PROMOÇÕES */
+
+  .carousel {
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
+
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card1 {
+    flex: 0 0 140px;
+    height: 220px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+    scroll-margin-inline: 24px;
+    transition:
+      flex-basis 0.6s ease-in-out,
+      height 0.6s ease-in-out,
+      transform 0.6s ease-in-out;
+  }
+
+  .card1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .overlay2 {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    background: transparent;
+    padding: 0;
+  }
+
+  .overlay2 h2 {
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .overlay2 p {
+    display: none;
+  }
+
+  /* NO MOBILE, AS SETAS NÃO APARECEM */
+
+  .buttons {
+    display: none;
+  }
+
+  /* DESTAQUES */
+
+  .destaques {
+    display: none;
+  }
+
+  /* TEXTO DA NOVA COLEÇÃO */
+
+  .colecao {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .colecao h2 {
+    font-size: clamp(20px, 5vw, 24px);
+    line-height: 1.3;
+    overflow-wrap: break-word;
+  }
+
+  .colecao p {
+    width: 100%;
+    max-width: 600px;
+    margin: 12px auto 20px;
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+
+  /* TEXTO INTRODUTÓRIO DAS PROMOÇÕES */
+
+  .promo {
+    width: 100%;
+    padding: 0 16px;
+    margin: 20px auto;
+    box-sizing: border-box;
+  }
+
+  .promo h2 {
+    font-size: clamp(20px, 5vw, 24px);
+    line-height: 1.3;
+  }
+
+  .promo p {
+    max-width: 600px;
+    margin: 12px auto;
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+
+  /* SECÇÃO DE PROMOÇÕES */
+
+  .Promoções {
+    width: 100%;
+    min-height: auto;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .container1,
+  .carousel,
+  .track {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .overlay2 h2,
+  .overlay2 p {
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 }
 
@@ -291,10 +461,12 @@
     top: 9px;
     right: 10px;
   }
+
   .card {
     width: 95%;
     height: 220px;
   }
+
   .destaques h1 {
     font-size: 24px;
   }
@@ -352,14 +524,15 @@
     margin-top: 20px;
   }
 
-  .card {
-    width: 95%;
-    height: 220px;
-  }
-
   .card1 {
     flex: 0 0 140px;
     height: 220px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+    scroll-margin-inline: 24px;
+    transition:
+      flex-basis 0.4s ease,
+      height 0.4s ease;
   }
 
   .card1.active {
@@ -397,89 +570,9 @@
 }
 
 /* =========================================================
-   STORIES MOBILE (até 768px)
-  ========================================================= */
-
-@media (max-width: 768px) {
-  .carousel {
-    overflow: hidden;
-  }
-  .card {
-    width: 100%;
-    max-width: 380px;
-    height: 280px;
-    gap: 5px;
-  }
-  .destaques {
-    display: none;
-  }
-  .track {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 12px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 8px 12px;
-    scrollbar-width: none;
-  }
-
-  .track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .card1 {
-    flex: 0 0 auto;
-    width: 110px;
-    height: 190px;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    scroll-snap-align: start;
-    padding: 3px;
-  }
-
-  .card1 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 14px;
-    display: block;
-  }
-
-  .overlay2 {
-    position: absolute;
-    bottom: 6px;
-    left: 6px;
-    right: 6px;
-    background: transparent;
-    padding: 0;
-  }
-
-  .overlay2 h2 {
-    font-size: 11px;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-    margin: 0;
-    line-height: 1.1;
-  }
-
-  .overlay2 p {
-    display: none;
-  }
-
-  .buttons {
-    display: none;
-  }
-}
-/* =========================================================
    MENU MOBILE: LOGOTIPO + HAMBÚRGUER JUNTOS
-   - Topo: barra com logotipo + faixa de links (sem hambúrguer)
-   - A descer: faixa de links esconde-se; ficam logotipo + hambúrguer
-   - A subir: faixa de links volta; hambúrguer esconde-se
-   (só até 768px; o desktop não muda)
 ========================================================= */
+
 @media (max-width: 768px) {
   .menu,
   .hamburger {
@@ -488,28 +581,32 @@
       transform 0.3s ease;
   }
 
-  /* menu completo visível → hambúrguer invisível */
+  /* MENU COMPLETO VISÍVEL: HAMBÚRGUER INVISÍVEL */
+
   body:not(.nav-hidden) .hamburger {
     opacity: 0;
     pointer-events: none;
     transform: scale(0.6);
   }
 
-  /* a descer → esconde só a faixa de links */
+  /* AO DESCER: ESCONDE A FAIXA DE LINKS */
+
   body.nav-hidden .menu {
     opacity: 0;
     transform: translateY(-14px);
     pointer-events: none;
   }
 
-  /* a descer → hambúrguer aparece ao lado do logotipo */
+  /* AO DESCER: HAMBÚRGUER APARECE */
+
   body.nav-hidden .hamburger {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
   }
 
-  /* sem a faixa de links, a lista de categorias abre logo abaixo da barra */
+  /* MENU DE CATEGORIAS */
+
   body.nav-hidden .nav2 ul {
     top: 56px;
     max-height: calc(100vh - 56px);

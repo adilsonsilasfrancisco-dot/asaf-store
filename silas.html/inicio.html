@@ -10,19 +10,27 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-   <link rel="stylesheet" href="../silas.css/inicio.css" />
-<link rel="stylesheet" href="../silas.css/nav-loja.css" />
-<link rel="stylesheet" href="../responsividade/inicio.css" />
-    <!-- Página só para membros -->
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="../silas.css/inicio.css" />
+
+    <!-- Navegação: deve vir depois do CSS principal -->
+    <link rel="stylesheet" href="../silas.css/nav-loja.css" />
+
+    <!-- CSS global do rodapé -->
+    <link rel="stylesheet" href="../silas.css/footer-global.css" />
+
+    <!-- Autenticação -->
     <script src="../silas.Js/auth.js"></script>
     <script>
       Auth.exigir();
     </script>
-      <link rel="stylesheet" href="../silas.css/footer-global.css" />
-</head>
+  </head>
+
   <body>
     <header>
       <!-- NAV PRINCIPAL -->
@@ -38,15 +46,14 @@
           <a href="inicio.html">Início</a>
           <a href="Produtos.html">Produtos</a>
           <a href="minha-area.html">Minha área</a>
-          <a
-            href="carrinho.html"
-            class="carrinho-link"
-            aria-label="Carrinho">
+
+          <a href="carrinho.html" class="carrinho-link" aria-label="Carrinho">
             <i class="fa-solid fa-cart-shopping carrinho-icone"></i>
             <span class="carrinho-texto">Carrinho</span>
             <span id="contadorCarrinho">0</span>
           </a>
-          <!-- o auth.js troca este botão para "Sair" -->
+
+          <!-- O auth.js troca este botão para Sair -->
           <a href="LOGIN.HTML" id="btn">Entrar</a>
         </div>
 
@@ -62,7 +69,8 @@
       <nav class="nav2">
         <ul id="mobileMenu">
           <li class="dropdown">
-            <a href="homens.html">Homens</a>
+            <a href="#">Homens</a>
+
             <div class="dropdown-content">
               <a href="#">Camisas</a>
               <a href="#">Calças</a>
@@ -72,6 +80,7 @@
 
           <li class="dropdown">
             <a href="#">Mulheres</a>
+
             <div class="dropdown-content">
               <a href="#">Vestidos</a>
               <a href="#">Saias</a>
@@ -81,6 +90,7 @@
 
           <li class="dropdown">
             <a href="#">Crianças</a>
+
             <div class="dropdown-content">
               <a href="#">Roupas</a>
               <a href="#">Calçados</a>
@@ -90,15 +100,17 @@
 
           <li class="dropdown">
             <a href="acessorios.html">Acessórios</a>
+
             <div class="dropdown-content">
-              <a href="acessorios.html?tipo=joias">Joias</a>
-              <a href="acessorios.html?tipo=relogios">Relógios</a>
-              <a href="acessorios.html?tipo=cintos">Cintos</a>
+              <a href="#">Joias</a>
+              <a href="#">Relógios</a>
+              <a href="#">Cintos</a>
             </div>
           </li>
 
           <li class="dropdown">
             <a href="#">Promoções</a>
+
             <div class="dropdown-content">
               <a href="#">Descontos</a>
               <a href="#">Ofertas Especiais</a>
@@ -110,27 +122,39 @@
     </header>
 
     <main>
-      <!-- CARROSSEL DE MEMBROS (gerado pelo inicio.js) -->
+      <!-- CARROSSEL DE MEMBROS -->
       <section class="slider" id="slider" aria-label="Destaques para membros">
-        <button class="seta seta-esq" id="anterior" aria-label="Anterior">
+        <button
+          class="seta seta-esq"
+          id="anterior"
+          type="button"
+          aria-label="Anterior">
           &#10094;
         </button>
-        <button class="seta seta-dir" id="seguinte" aria-label="Seguinte">
+
+        <button
+          class="seta seta-dir"
+          id="seguinte"
+          type="button"
+          aria-label="Seguinte">
           &#10095;
         </button>
+
         <div class="dots" id="dots"></div>
       </section>
 
-      <!-- FAIXA: saudação + cupão -->
+      <!-- FAIXA: SAUDAÇÃO + CUPÃO -->
       <section class="faixa">
         <p>
           <span id="saudacao">Olá</span>, <b id="nome"></b>. Esta é a tua página
           inicial de membro.
         </p>
+
         <div class="cupao">
           <span>Cupão de membro</span>
           <strong>ASAF15</strong>
           <small>15% de desconto no carrinho</small>
+
           <button type="button" id="copiar">Copiar</button>
         </div>
       </section>
@@ -141,40 +165,45 @@
           <h2>Em destaque para ti</h2>
           <a href="Produtos.html">Ver todos</a>
         </div>
+
         <div class="chips" id="chips"></div>
+
         <div class="grelha" id="destaques"></div>
       </section>
     </main>
-<div class="footer">
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
       <div class="footer-container">
         <div class="footer-box">
-         <h2>ASAF STORE</h2>
+          <h2>ASAF STORE</h2>
           <p>Moda, estilo e conforto para si.</p>
         </div>
+
         <div class="footer-box">
           <h2>Links</h2>
-          <a href="#">Home</a>
+          <a href="inicio.html">Home</a>
           <a href="Produtos.html">Produtos</a>
           <a href="SOBRE.HTML">Sobre</a>
           <a href="CONTATO.html">Contacto</a>
         </div>
+
         <div class="footer-box">
           <h2>Contactos</h2>
           <p>+244 943 233 053</p>
           <p>ASAFmoda@gmail.com</p>
         </div>
       </div>
+
       <div class="footer-copy">
         <p>© 2026 ASAF STORE - Todos os direitos reservados.</p>
       </div>
-    </div>
+    </footer>
 
-
-       <script src="../silas.Js/inicio.js"></script>
+    <!-- JAVASCRIPT -->
+    <script src="../silas.Js/inicio.js"></script>
     <script src="../silas.Js/nav-scroll.js"></script>
     <script src="../silas.Js/menu.js"></script>
     <script src="../silas.Js/menu-scroll.js"></script>
-  </body>
-</html>
   </body>
 </html>

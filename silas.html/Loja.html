@@ -16,8 +16,8 @@
     <script>
       Auth.vitrine();
     </script>
-      <link rel="stylesheet" href="../silas.css/footer-global.css" />
-</head>
+    <link rel="stylesheet" href="../silas.css/footer-global.css" />
+  </head>
   <body>
     <header>
       <nav class="nav1">
@@ -38,7 +38,7 @@
       <nav class="nav2">
         <ul id="mobileMenu">
           <li class="dropdown">
-            <a href="homens.html">Homens</a>
+            <a href="#">Homens</a>
             <div class="dropdown-content">
               <a href="#">Camisas</a>
               <a href="#">Calças</a>
@@ -65,7 +65,7 @@
             <a href="acessorios.html">Acessórios</a>
             <div class="dropdown-content">
               <a href="#">Joias</a>
-              <a href="reologios.html">Relógios</a>
+              <a href="#">Relógios</a>
               <a href="#">Cintos</a>
             </div>
           </li>
@@ -333,7 +333,7 @@
         <div class="carousel">
           <div class="track" id="track">
             <div
-              class="card1 active"
+              class="card1"
               onclick="irParaProduto(6)"
               style="cursor: pointer">
               <img src="../img/White Air Force 1.jfif" alt="Produto 5" />
@@ -403,7 +403,7 @@
     <div class="footer">
       <div class="footer-container">
         <div class="footer-box">
-          <h2>Minha Loja</h2>
+          <h2>ASAF STORE</h2>
           <p>Moda, estilo e conforto para si.</p>
         </div>
         <div class="footer-box">
@@ -420,42 +420,16 @@
         </div>
       </div>
       <div class="footer-copy">
-        <p>© 2026 Minha Loja - Todos os direitos reservados.</p>
+        <p>© 2026 ASAF STORE - Todos os direitos reservados.</p>
       </div>
     </div>
 
     <script src="../silas.Js/carrinho.js"></script>
     <script src="../silas.Js/java.js"></script>
-    <script>
-      /* CARROSSEL DE PROMOÇÕES */
-      const cards = document.querySelectorAll(".card1");
-      let current = 0;
-
-      function updateCarousel() {
-        cards.forEach(function (card1) {
-          card1.classList.remove("active");
-        });
-        cards[current].classList.add("active");
-      }
-
-      document.getElementById("next").addEventListener("click", function () {
-        current = (current + 1) % cards.length;
-        updateCarousel();
-      });
-
-      document.getElementById("prev").addEventListener("click", function () {
-        current = (current - 1 + cards.length) % cards.length;
-        updateCarousel();
-      });
-
-      setInterval(function () {
-        current = (current + 1) % cards.length;
-        updateCarousel();
-      }, 3000);
-    </script>
 
     <script src="../silas.Js/menu.js"></script>
     <script src="../silas.Js/bootstrap.bundle.js"></script>
     <script src="../silas.Js/menu-scroll.js"></script>
+    <script src="../silas.Js/carrossel-promocoes.js"></script>
   </body>
 </html>
