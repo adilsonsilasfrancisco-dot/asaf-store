@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "id":  13,
         "nome":  "Fato",
@@ -57,7 +57,7 @@
     {
         "id":  1,
         "nome":  "Nike",
-        "categoria":  "CalÃ§ados",
+        "categoria":  "Calçados",
         "preco":  20000,
         "stock":  2,
         "descricao":  "Elegante\n",
@@ -68,7 +68,7 @@
     {
         "id":  2,
         "nome":  "Nike",
-        "categoria":  "CalÃ§ados",
+        "categoria":  "Calçados",
         "preco":  20000,
         "stock":  2,
         "descricao":  "kkkkkkkk",
@@ -79,7 +79,7 @@
     {
         "id":  6,
         "nome":  "Nike",
-        "categoria":  "CalÃ§ados",
+        "categoria":  "Calçados",
         "preco":  50000,
         "stock":  10,
         "descricao":  "Para todas ocasioes",
@@ -90,7 +90,7 @@
     {
         "id":  16,
         "nome":  "NIKE DUKAN",
-        "categoria":  "CalÃ§ados",
+        "categoria":  "Calçados",
         "preco":  44988,
         "stock":  8,
         "descricao":  "Elegancia pura",
@@ -101,7 +101,7 @@
     {
         "id":  9,
         "nome":  "Oculos",
-        "categoria":  "AcessÃ³rios",
+        "categoria":  "Acessórios",
         "preco":  5000,
         "stock":  2,
         "descricao":  "Oculos casual",
@@ -112,7 +112,7 @@
     {
         "id":  15,
         "nome":  "oculos de sol",
-        "categoria":  "AcessÃ³rios",
+        "categoria":  "Acessórios",
         "preco":  10000,
         "stock":  12,
         "descricao":  "Oculos de qualidade",
@@ -123,7 +123,7 @@
     {
         "id":  7,
         "nome":  "Pulseiras",
-        "categoria":  "AcessÃ³rios",
+        "categoria":  "Acessórios",
         "preco":  6000,
         "stock":  5,
         "descricao":  "Acessorio elegante",
@@ -134,7 +134,7 @@
     {
         "id":  8,
         "nome":  "Relogio",
-        "categoria":  "AcessÃ³rios",
+        "categoria":  "Acessórios",
         "preco":  12000,
         "stock":  4,
         "descricao":  "Relogio elegante",
@@ -167,7 +167,7 @@
     {
         "id":  10,
         "nome":  "Tenis Skate",
-        "categoria":  "CalÃ§ados",
+        "categoria":  "Calçados",
         "preco":  30000,
         "stock":  9,
         "descricao":  "Perfeito para galas",
