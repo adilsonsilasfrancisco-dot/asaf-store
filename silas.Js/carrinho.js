@@ -387,17 +387,41 @@ function configurarEventos() {
    Usado pela Nova Coleção, Produtos em Destaque e Promoções.
    Guarda o id, imagem e abre o modal na página de produtos.
 ==========================================================*/
+
 function irParaProduto(id, imagem = null) {
-  const produtoDestaque = imagem
-    ? {
-        id: Number(id),
-        imagem: imagem,
-      }
-    : id;
+  const idProduto = Number(id);
+
+  if (!Number.isInteger(idProduto) || idProduto <= 0) {
+    console.error("ID de produto inválido:", id);
+    return;
+  }
+
+  // Guardar o produto selecionado e a imagem do cartão
+  const produtoDestaque = {
+    id: idProduto,
+    imagem: imagem || null,
+  };
 
   localStorage.setItem("produto_destaque", JSON.stringify(produtoDestaque));
 
-  window.location.href = "/silas.html/Produtos.html";
+  // Identificar a raiz do projeto
+  const caminhoAtual = window.location.pathname;
+  const partes = caminhoAtual.split("/").filter(Boolean);
+  const indiceSilas = partes.lastIndexOf("silas.html");
+
+  let raizProjeto;
+
+  if (indiceSilas !== -1) {
+    const prefixo = partes.slice(0, indiceSilas).join("/");
+    raizProjeto = prefixo ? `/${prefixo}/` : "/";
+  } else {
+    raizProjeto = caminhoAtual.slice(0, caminhoAtual.lastIndexOf("/") + 1);
+  }
+
+  // Abrir Produtos.html preservando o caminho do GitHub Pages
+  const destino = `${raizProjeto}silas.html/Produtos.html`;
+
+  window.location.href = destino;
 }
 
 /*==========================================================

@@ -13,9 +13,7 @@
       rel="stylesheet" />
     <title>loja roupas</title>
     <script src="../silas.Js/auth.js"></script>
-    <script>
-      Auth.vitrine();
-    </script>
+
     <link rel="stylesheet" href="../silas.css/footer-global.css" />
   </head>
   <body>
@@ -263,23 +261,43 @@
 
     <!-- NOVA COLEÇÃO -->
     <div class="container">
-      <div class="card" onclick="irParaProduto(11)" style="cursor: pointer">
+      <div
+        class="card"
+        onclick="
+          irParaProduto(11, this.querySelector('img').getAttribute('src'))
+        "
+        style="cursor: pointer">
         <img src="../img/Product id_ 1005004023269991.jfif" alt="Nike" />
       </div>
 
-      <div class="card" onclick="irParaProduto(12)" style="cursor: pointer">
+      <div
+        class="card"
+        onclick="
+          irParaProduto(12, this.querySelector('img').getAttribute('src'))
+        "
+        style="cursor: pointer">
         <img
           src="../img/Dresses for Women Cherry Print Ruched Bust Puff Sleeve Dress.jfif"
           alt="Fato Elegante" />
       </div>
 
-      <div class="card" onclick="irParaProduto(13)" style="cursor: pointer">
+      <div
+        class="card"
+        onclick="
+          irParaProduto(13, this.querySelector('img').getAttribute('src'))
+        "
+        style="cursor: pointer">
         <img
           src="../img/Men Short Sleeve Textured Shirt And Shorts Set, Summer.jfif"
           alt="Jaqueta" />
       </div>
 
-      <div class="card" onclick="irParaProduto(14)" style="cursor: pointer">
+      <div
+        class="card"
+        onclick="
+          irParaProduto(14, this.querySelector('img').getAttribute('src'))
+        "
+        style="cursor: pointer">
         <img src="../img/transferir (1).jfif" alt="Jaqueta" />
       </div>
     </div>
